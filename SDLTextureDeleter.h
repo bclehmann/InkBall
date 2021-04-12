@@ -5,10 +5,11 @@
 
 #include <SDL2/SDL.h>
 
-class SDLTextureDeleter {
-public:
-	void operator()(SDL_Texture *texture);
-};
-
+namespace Where1::SDL_Utilities {
+	class SDLTextureDeleter {
+	public:
+		void operator()(SDL_Texture *texture);
+	};
+}
 
 #endif //INKBALL_SDLTEXTUREDELETER_H

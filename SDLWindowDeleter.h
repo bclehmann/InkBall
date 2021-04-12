@@ -3,10 +3,12 @@
 #ifndef INKBALL_SDLWINDOWDELETER_H
 #define INKBALL_SDLWINDOWDELETER_H
 
- class SDLWindowDeleter {
-public:
-	void operator()(SDL_Window *window);
-};
 
+namespace Where1::SDL_Utilities {
+	class SDLWindowDeleter {
+	public:
+		void operator()(SDL_Window *window);
+	};
+}
 
 #endif //INKBALL_SDLWINDOWDELETER_H

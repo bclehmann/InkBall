@@ -11,20 +11,27 @@
 #include <SDL2/SDL_image.h>
 #include <memory>
 
-class Game {
-public:
-	Game();
-	~Game();
-	void play();
-	void quit();
-private:
-	void handle_event(SDL_Event& event);
-	void initialize_textures();
-	bool should_quit = false;
-	std::unique_ptr<SDL_Window, SDLWindowDeleter> window;
-	std::unique_ptr<SDL_Renderer, SDLRendererDeleter> renderer;
-	std::unique_ptr<SDL_Texture, SDLTextureDeleter> block_texture;
-};
+namespace Where1::InkBall {
+	class Game {
+	public:
+		Game();
 
+		~Game();
+
+		void play();
+
+		void quit();
+
+	private:
+		void handle_event(SDL_Event &event);
+
+		void initialize_textures();
+
+		bool should_quit = false;
+		std::unique_ptr<SDL_Window, SDL_Utilities::SDLWindowDeleter> window;
+		std::unique_ptr<SDL_Renderer, SDL_Utilities::SDLRendererDeleter> renderer;
+		std::unique_ptr<SDL_Texture, SDL_Utilities::SDLTextureDeleter> block_texture;
+	};
+}
 
 #endif //INKBALL_GAME_H

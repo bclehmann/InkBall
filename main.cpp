@@ -7,7 +7,7 @@
 
 
 int main(int argc, char *argv[]) {
-	Game game;
+	Where1::InkBall::Game  game;
 	game.play();
 
 	return 0;
