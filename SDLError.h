@@ -10,7 +10,7 @@
 namespace Where1::SDL_Utilities {
 	class SDLError : public std::exception {
 	public:
-		SDLError(const char *error_message) {
+		explicit SDLError(const char *error_message) {
 			std::string tmp = error_message;
 			tmp += ' ';
 			tmp += SDL_GetError(); // If this was all on one line it would do pointer addition because C++

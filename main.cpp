@@ -1,11 +1,6 @@
-#include <iostream>
-#include <memory>
-#include "SDL2/SDL.h"
-#include "SDLWindowDeleter.h"
 #include "Game.h"
 
-
-
+// SDL will not be able to find main unless it has this signature even though the parameters are unused
 int main(int argc, char *argv[]) {
 	Where1::InkBall::Game  game;
 	game.play();
