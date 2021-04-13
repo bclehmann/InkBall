@@ -1,4 +1,5 @@
 
+#include <iostream>
 #include "Game.h"
 
 namespace Where1::InkBall {
@@ -23,7 +24,7 @@ namespace Where1::InkBall {
 			rect.y = 200;
 			rect.w = 32;
 			rect.h = 32;
-			SDL_RenderCopy(render_ptr, block_texture.get(), NULL, &rect);
+			SDL_RenderCopy(render_ptr, textures["block"].get(), NULL, &rect);
 
 			SDL_RenderPresent(render_ptr);
 		}
@@ -71,20 +72,28 @@ namespace Where1::InkBall {
 	}
 
 	void Game::initialize_textures() {
-		SDL_Surface *block_surface = IMG_Load("./assets/block.png");
+		for (auto &texture_info : texture_names) {
+			std::string &common_name = texture_info.first;
+			std::string &filename = texture_info.second;
 
-		if (block_surface == nullptr) {
-			throw SDL_Utilities::SDLError("Could not load block surface:");
-		}
+			std::string path = path_prefix + filename;
+			SDL_Surface *surface = IMG_Load(path.c_str());
 
-		block_texture = std::unique_ptr<SDL_Texture, SDL_Utilities::SDLTextureDeleter>(
-				SDL_CreateTextureFromSurface(renderer.get(), block_surface));
+			if (surface == nullptr) {
+				std::string message = "Could not load surface from ";
+				message += path + ":";
+				throw SDL_Utilities::SDLError(message.c_str());
+			}
 
-		if (block_surface != nullptr)
-			SDL_FreeSurface(block_surface);
+			textures[common_name] = std::unique_ptr<SDL_Texture, SDL_Utilities::SDLTextureDeleter>(
+					SDL_CreateTextureFromSurface(renderer.get(), surface));
 
-		if (!block_texture) {
-			throw SDL_Utilities::SDLError("Could not load block texture:");
+			if (surface != nullptr)
+				SDL_FreeSurface(surface);
+
+			if (textures[common_name].get() == nullptr) {
+				throw SDL_Utilities::SDLError("Could not load texture:");
+			}
 		}
 	}
 }

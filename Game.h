@@ -10,6 +10,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <memory>
+#include <unordered_map>
+#include <vector>
 
 namespace Where1::InkBall {
 	class Game {
@@ -30,7 +32,10 @@ namespace Where1::InkBall {
 		bool should_quit = false;
 		std::unique_ptr<SDL_Window, SDL_Utilities::SDLWindowDeleter> window;
 		std::unique_ptr<SDL_Renderer, SDL_Utilities::SDLRendererDeleter> renderer;
-		std::unique_ptr<SDL_Texture, SDL_Utilities::SDLTextureDeleter> block_texture;
+
+		std::unordered_map<std::string, std::unique_ptr<SDL_Texture, SDL_Utilities::SDLTextureDeleter>> textures;
+		std::string path_prefix = "./assets/";
+		std::vector<std::pair<std::string, std::string>> texture_names{{"block", "block.png"}};
 	};
 }
 
