@@ -10,6 +10,8 @@
 namespace Where1::InkBall {
 	class Level : public Renderable, public Updatable {
 	public:
+		Level() = default;
+		Level(std::vector<Ball> balls, std::vector<Block> blocks);
 		std::vector<Ball> balls;
 		std::vector<Block> blocks;
 

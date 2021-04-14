@@ -46,8 +46,7 @@ namespace Where1::InkBall {
 			{"pink_ball", "pink_ball.png"},
 		};
 
-		std::vector<Ball> balls;
-		Level level;
+		Level current_level;
 	};
 }
 

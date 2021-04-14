@@ -20,38 +20,10 @@ namespace Where1::InkBall {
 				handle_event(event);
 			}
 
-			SDL_Renderer *render_ptr = renderer.get();
+			current_level.update(delta_t);
+			current_level.draw(renderer.get());
 
-
-			SDL_SetRenderDrawColor(render_ptr, 230, 230, 230, SDL_ALPHA_OPAQUE);
-			SDL_RenderClear(renderer.get());
-
-			SDL_SetRenderDrawColor(render_ptr, 255, 255, 255, SDL_ALPHA_OPAQUE);
-			SDL_RenderDrawLine(render_ptr, 320, 200, 300, 240);
-
-			SDL_Rect rect;
-			rect.x = 200;
-			rect.y = 200;
-			rect.w = 32;
-			rect.h = 32;
-			SDL_RenderCopy(render_ptr, textures["block"].get(), nullptr, &rect);
-
-			SDL_SetRenderDrawColor(render_ptr, 0, 0, 255, SDL_ALPHA_OPAQUE);
-			SDL_Utilities::DrawCircle(render_ptr, 200, 100, 50);
-
-			SDL_Rect rect2{.x = 200, .y = 100, .w = 50, .h = 50};
-			SDL_RenderCopy(render_ptr, textures["sparkle"].get(), nullptr, &rect2);
-
-			SDL_Rect rect3{.x = 300, .y = 100, .w = 50, .h = 50};
-			SDL_RenderCopy(render_ptr, textures["grey_ball"].get(), nullptr, &rect3);
-
-			for(auto& ball : balls){
-				ball.update(delta_t);
-				ball.draw(render_ptr);
-			}
-
-
-			SDL_RenderPresent(render_ptr);
+			SDL_RenderPresent(renderer.get());
 		}
 	}
 
@@ -91,7 +63,10 @@ namespace Where1::InkBall {
 
 		initialize_textures();
 
-		balls.emplace_back(*textures["blue_ball"], Geometry::Vector2<double>{0, 0}, Geometry::Vector2<double>{10, 5});
+		std::vector<Ball> balls = {Ball(*textures["blue_ball"], Geometry::Vector2<double>{0, 0}, Geometry::Vector2<double>{10, 5})};
+		std::vector<Block> blocks = {Block(*textures["block"], Geometry::Vector2<int>{200, 200})};
+
+		current_level = Level(balls, blocks);
 	}
 
 	Game::~Game() {
