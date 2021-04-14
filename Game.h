@@ -35,7 +35,11 @@ namespace Where1::InkBall {
 
 		std::unordered_map<std::string, std::unique_ptr<SDL_Texture, SDL_Utilities::SDLTextureDeleter>> textures;
 		std::string path_prefix = "./assets/";
-		std::vector<std::pair<std::string, std::string>> texture_names{{"block", "block.png"}};
+		std::vector<std::pair<std::string, std::string>> texture_names{
+			{"block", "block.png"},
+			{"sparkle", "sparkle.png"},
+			{"blue_ball", "blue_ball.png"}
+		};
 	};
 }
 

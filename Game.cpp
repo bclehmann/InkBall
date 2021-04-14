@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include "Game.h"
+#include "Drawing.h"
 
 namespace Where1::InkBall {
 	void Game::play() {
@@ -24,7 +25,16 @@ namespace Where1::InkBall {
 			rect.y = 200;
 			rect.w = 32;
 			rect.h = 32;
-			SDL_RenderCopy(render_ptr, textures["block"].get(), NULL, &rect);
+			SDL_RenderCopy(render_ptr, textures["block"].get(), nullptr, &rect);
+
+			SDL_SetRenderDrawColor(render_ptr, 0, 0, 255, SDL_ALPHA_OPAQUE);
+			SDL_Utilities::DrawCircle(render_ptr, 200, 100, 50);
+
+			SDL_Rect rect2{.x = 200, .y = 100, .w = 50, .h = 50};
+			SDL_RenderCopy(render_ptr, textures["sparkle"].get(), nullptr, &rect2);
+
+			SDL_Rect rect3{.x = 300, .y = 100, .w = 50, .h = 50};
+			SDL_RenderCopy(render_ptr, textures["blue_ball"].get(), nullptr, &rect3);
 
 			SDL_RenderPresent(render_ptr);
 		}
