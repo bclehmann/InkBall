@@ -6,6 +6,8 @@
 #include "SDLError.h"
 #include "SDLRendererDeleter.h"
 #include "SDLTextureDeleter.h"
+#include "Ball.h"
+#include "Level.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -43,6 +45,9 @@ namespace Where1::InkBall {
 			{"orange_ball", "orange_ball.png"},
 			{"pink_ball", "pink_ball.png"},
 		};
+
+		std::vector<Ball> balls;
+		Level level;
 	};
 }
 

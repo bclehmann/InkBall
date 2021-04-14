@@ -2,10 +2,19 @@
 #include <iostream>
 #include "Game.h"
 #include "Drawing.h"
+#include "Ball.h"
 
 namespace Where1::InkBall {
 	void Game::play() {
+		unsigned long long now = SDL_GetPerformanceCounter();
+		unsigned long long last = now;
+
 		while (!should_quit) {
+			last = now;
+			now = SDL_GetPerformanceCounter();
+
+			double delta_t = (now - last) / (double)SDL_GetPerformanceFrequency();
+
 			SDL_Event event;
 			while (!should_quit && SDL_PollEvent(&event)) {
 				handle_event(event);
@@ -35,6 +44,12 @@ namespace Where1::InkBall {
 
 			SDL_Rect rect3{.x = 300, .y = 100, .w = 50, .h = 50};
 			SDL_RenderCopy(render_ptr, textures["grey_ball"].get(), nullptr, &rect3);
+
+			for(auto& ball : balls){
+				ball.update(delta_t);
+				ball.draw(render_ptr);
+			}
+
 
 			SDL_RenderPresent(render_ptr);
 		}
@@ -75,6 +90,8 @@ namespace Where1::InkBall {
 		}
 
 		initialize_textures();
+
+		balls.emplace_back(*textures["blue_ball"], Geometry::Vector2<double>{0, 0}, Geometry::Vector2<double>{10, 5});
 	}
 
 	Game::~Game() {
