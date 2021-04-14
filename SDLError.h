@@ -2,6 +2,7 @@
 #ifndef INKBALL_SDLERROR_H
 #define INKBALL_SDLERROR_H
 
+#include <SDL2/SDL.h>
 
 #include <exception>
 #include <string>
