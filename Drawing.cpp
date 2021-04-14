@@ -1,8 +1,8 @@
 
 #include "Drawing.h"
 
-namespace Where1::SDL_Utilities{
-	int CircleError(int x, int y, int r){
+namespace Where1::SDL_Utilities {
+	int CircleError(int x, int y, int r) {
 		return r * r - x * x - y * y;
 	}
 
@@ -13,30 +13,28 @@ namespace Where1::SDL_Utilities{
 
 		do {
 			x++;
-			while(y * y + x * x >= r_squared){
+			while (y * y + x * x >= r_squared) {
 				y--;
 			}
 
 
-			// Above we calculate one octant of the circle, now we exploit its symmetry
-			SDL_RenderDrawLine(renderer, centre_x, centre_y, centre_x + x, centre_y + y);
-			SDL_RenderDrawLine(renderer, centre_x, centre_y, centre_x + x, centre_y - y);
-			SDL_RenderDrawLine(renderer, centre_x, centre_y, centre_x - x, centre_y + y);
-			SDL_RenderDrawLine(renderer, centre_x, centre_y, centre_x - x, centre_y - y);
-
-			SDL_RenderDrawLine(renderer, centre_x, centre_y, centre_x + y, centre_y + x);
-			SDL_RenderDrawLine(renderer, centre_x, centre_y, centre_x + y, centre_y - x);
-			SDL_RenderDrawLine(renderer, centre_x, centre_y, centre_x - y, centre_y + x);
-			SDL_RenderDrawLine(renderer, centre_x, centre_y, centre_x - y, centre_y - x);
-
-			SDL_Rect rect{
-				.x = centre_x - x,
-				.y = centre_y - y,
-				.w = 2 * x,
-				.h = 2 * y
+			// Above we calculate one point in one octant of the circle, now we exploit its symmetry
+			SDL_Rect rects[]{
+					{
+							.x = centre_x - x,
+							.y = centre_y - y,
+							.w = 2 * x,
+							.h = 2 * y
+					},
+					{
+							.x = centre_x - y,
+							.y = centre_y - x,
+							.w = 2 * y,
+							.h = 2 * x
+					}
 			};
 
-			SDL_RenderFillRect(renderer, &rect); // To fill in where it fringes, still need to convert to texture and draw texture
-		}while(y >= x);
+			SDL_RenderFillRects(renderer, rects, 2);
+		} while (y >= x);
 	}
 }
