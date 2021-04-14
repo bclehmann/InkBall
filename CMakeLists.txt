@@ -9,7 +9,7 @@ set(SDL_PATH "SDL 2.0.14 x86-32")
 include_directories(${PROJECT_SOURCE_DIR}/include)
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 
-add_executable(InkBall main.cpp SDLWindowDeleter.cpp SDLWindowDeleter.h Game.cpp Game.h SDLError.h SDLRendererDeleter.cpp SDLRendererDeleter.h SDLTextureDeleter.cpp SDLTextureDeleter.h)
+add_executable(InkBall main.cpp SDLWindowDeleter.cpp SDLWindowDeleter.h Game.cpp Game.h SDLError.h SDLRendererDeleter.cpp SDLRendererDeleter.h SDLTextureDeleter.cpp SDLTextureDeleter.h Drawing.cpp Drawing.h)
 
 target_link_libraries(InkBall mingw32 SDL2main SDL2 SDL2_image)
 
