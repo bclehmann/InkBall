@@ -38,7 +38,10 @@ namespace Where1::InkBall {
 		std::vector<std::pair<std::string, std::string>> texture_names{
 			{"block", "block.png"},
 			{"sparkle", "sparkle.png"},
-			{"blue_ball", "blue_ball.png"}
+			{"blue_ball", "blue_ball.png"},
+			{"grey_ball", "grey_ball.png"},
+			{"orange_ball", "orange_ball.png"},
+			{"pink_ball", "pink_ball.png"},
 		};
 	};
 }

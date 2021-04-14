@@ -14,7 +14,7 @@ namespace Where1::InkBall {
 			SDL_Renderer *render_ptr = renderer.get();
 
 
-			SDL_SetRenderDrawColor(render_ptr, 200, 200, 200, SDL_ALPHA_OPAQUE);
+			SDL_SetRenderDrawColor(render_ptr, 230, 230, 230, SDL_ALPHA_OPAQUE);
 			SDL_RenderClear(renderer.get());
 
 			SDL_SetRenderDrawColor(render_ptr, 255, 255, 255, SDL_ALPHA_OPAQUE);
@@ -33,8 +33,8 @@ namespace Where1::InkBall {
 			SDL_Rect rect2{.x = 200, .y = 100, .w = 50, .h = 50};
 			SDL_RenderCopy(render_ptr, textures["sparkle"].get(), nullptr, &rect2);
 
-			SDL_Rect rect3{.x = 300, .y = 100, .w = 50, .h = 50};
-			SDL_RenderCopy(render_ptr, textures["blue_ball"].get(), nullptr, &rect3);
+			SDL_Rect rect3{.x = 300, .y = 100, .w = 20, .h = 20};
+			SDL_RenderCopy(render_ptr, textures["grey_ball"].get(), nullptr, &rect3);
 
 			SDL_RenderPresent(render_ptr);
 		}
