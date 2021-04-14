@@ -101,7 +101,7 @@ namespace Where1::InkBall {
 			if (surface != nullptr)
 				SDL_FreeSurface(surface);
 
-			if (textures[common_name].get() == nullptr) {
+			if (!textures[common_name].get()) {
 				throw SDL_Utilities::SDLError("Could not load texture:");
 			}
 		}
