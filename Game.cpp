@@ -33,7 +33,7 @@ namespace Where1::InkBall {
 			SDL_Rect rect2{.x = 200, .y = 100, .w = 50, .h = 50};
 			SDL_RenderCopy(render_ptr, textures["sparkle"].get(), nullptr, &rect2);
 
-			SDL_Rect rect3{.x = 300, .y = 100, .w = 20, .h = 20};
+			SDL_Rect rect3{.x = 300, .y = 100, .w = 50, .h = 50};
 			SDL_RenderCopy(render_ptr, textures["grey_ball"].get(), nullptr, &rect3);
 
 			SDL_RenderPresent(render_ptr);
