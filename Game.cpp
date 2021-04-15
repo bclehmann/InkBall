@@ -20,7 +20,17 @@ namespace Where1::InkBall {
 			now = SDL_GetPerformanceCounter();
 			double delta_t = (now - last) / (double) SDL_GetPerformanceFrequency();
 
-			current_level.update(delta_t);
+			const double max_timestep = 1 / 60.0;
+
+			while(delta_t > 1 / 60.0){
+				delta_t -= max_timestep;
+				current_level.update(max_timestep);
+			}
+
+			if(delta_t > 0) {
+				current_level.update(delta_t);
+			}
+
 			current_level.draw(renderer.get());
 
 			SDL_RenderPresent(renderer.get());
