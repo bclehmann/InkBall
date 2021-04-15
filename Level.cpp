@@ -16,8 +16,14 @@ namespace Where1::InkBall {
 	}
 
 	void Level::update(double timestep) {
-		for (auto &curr : balls) {
-			curr.update(timestep);
+		for (auto &ball : balls) {
+			ball.update(timestep);
+
+			Geometry::Line<double> l(Geometry::Vector2<double>(50, 0), Geometry::Vector2<double>(50, 5000));
+			if(ball.collides_with(l)){
+				ball.reflect(Geometry::Vector2<double>(0, 1));
+			}
+
 		}
 	}
 

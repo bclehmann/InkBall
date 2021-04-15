@@ -5,6 +5,8 @@
 #include "Renderable.h"
 #include "Vector2.h"
 #include "Updatable.h"
+#include "Line.h"
+#include "Block.h"
 
 #include <SDL2/SDL.h>
 
@@ -24,6 +26,11 @@ namespace Where1::InkBall {
 		void update(double timestep);
 
 		void draw(SDL_Renderer *renderer) override;
+
+		void reflect(Geometry::Vector2<double> reflection_vector);
+
+		bool collides_with(Geometry::Line<double> &line);
+		bool collides_with(Block &block);
 
 	private:
 		SDL_Texture &texture;

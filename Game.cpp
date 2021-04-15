@@ -63,7 +63,7 @@ namespace Where1::InkBall {
 
 		initialize_textures();
 
-		std::vector<Ball> balls = {Ball(*textures["blue_ball"], Geometry::Vector2<double>{0, 0}, Geometry::Vector2<double>{10, 5})};
+		std::vector<Ball> balls = {Ball(*textures["blue_ball"], Geometry::Vector2<double>{0, 0}, Geometry::Vector2<double>{30, 30})};
 		std::vector<Block> blocks = {Block(*textures["block"], Geometry::Vector2<int>{200, 200})};
 
 		current_level = Level(balls, blocks);

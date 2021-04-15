@@ -9,7 +9,7 @@
 
 
 namespace Where1::InkBall {
-	class Block : public Renderable{
+	class Block : public Renderable {
 	public:
 		Block(SDL_Texture &texture, Geometry::Vector2<int> position);
 
@@ -17,11 +17,11 @@ namespace Where1::InkBall {
 
 		void draw(SDL_Renderer *renderer) override;
 
+		static const int width = 32;
 	private:
 		SDL_Texture &texture;
 		Geometry::Vector2<int> position;
 
-		static const int width = 32;
 	};
 }
 
