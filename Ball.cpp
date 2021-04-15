@@ -69,7 +69,7 @@ namespace Where1::InkBall {
 
 	void Ball::reflect_if_collides_with(Block &block) {
 		// If it's outside the block and this is true it won't collide
-		// If it's inside then it's leaving and we best not get in its way
+		// If it's inside and this is true then it's leaving and we best not get in its way
 		if(!is_travelling_towards(block)){
 			return;
 		}
