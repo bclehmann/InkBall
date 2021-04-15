@@ -19,7 +19,7 @@ namespace Where1::InkBall {
 			last = now;
 			now = SDL_GetPerformanceCounter();
 			double delta_t = (now - last) / (double) SDL_GetPerformanceFrequency();
-			
+
 			current_level.update(delta_t);
 			current_level.draw(renderer.get());
 
@@ -64,8 +64,22 @@ namespace Where1::InkBall {
 		initialize_textures();
 
 		std::vector<Ball> balls = {
-				Ball(*textures["blue_ball"], Geometry::Vector2<double>{10, 10}, Geometry::Vector2<double>{50, 50})};
-		std::vector<Block> blocks = {Block(*textures["block"], Geometry::Vector2<int>{200, 200})};
+				Ball(*textures["grey_ball"], Geometry::Vector2<double>{70, 70}, Geometry::Vector2<double>{50, 50}),
+				Ball(*textures["blue_ball"], Geometry::Vector2<double>{70, 70}, Geometry::Vector2<double>{-50, -50}),
+				Ball(*textures["orange_ball"], Geometry::Vector2<double>{70, 70}, Geometry::Vector2<double>{20, -50}),
+				Ball(*textures["pink_ball"], Geometry::Vector2<double>{70, 70}, Geometry::Vector2<double>{-50, 20}),
+		};
+		std::vector<Block> blocks = {Block(*textures["block"], Geometry::Vector2<double>{200, 200})};
+
+		for(int i = 0; i < 600 - Block::width; i += Block::width){
+			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(0, i));
+			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(480 - Block::width, i));
+		}
+
+		for(int i = 0; i <= 480; i += Block::width){
+			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(i, 0));
+			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(i, 600 - Block::width));
+		}
 
 		current_level = Level(balls, blocks);
 	}

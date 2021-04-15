@@ -32,6 +32,11 @@ namespace Where1::InkBall {
 		bool collides_with(Geometry::Line<double> &line);
 		bool collides_with(Block &block);
 
+		bool is_travelling_towards(Block &block);
+
+		void reflect_if_collides_with(Block &block);
+
+
 	private:
 		SDL_Texture &texture;
 		Geometry::Vector2<double> position;
