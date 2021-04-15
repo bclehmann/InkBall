@@ -39,7 +39,15 @@ namespace Where1::Geometry {
 			return Vector2<T>(x + other.x, y + other.y);
 		}
 
+		Vector2<T> operator+(Vector2<T> &&other){
+			return Vector2<T>(x + other.x, y + other.y);
+		}
+
 		Vector2<T> operator-(Vector2<T> &other){
+			return Vector2<T>(x - other.x, y - other.y);
+		}
+
+		Vector2<T> operator-(Vector2<T> &&other){
 			return Vector2<T>(x - other.x, y - other.y);
 		}
 
