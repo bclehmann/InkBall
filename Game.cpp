@@ -10,16 +10,16 @@ namespace Where1::InkBall {
 		unsigned long long last = now;
 
 		while (!should_quit) {
-			last = now;
-			now = SDL_GetPerformanceCounter();
-
-			double delta_t = (now - last) / (double)SDL_GetPerformanceFrequency();
-
 			SDL_Event event;
 			while (!should_quit && SDL_PollEvent(&event)) {
 				handle_event(event);
+				now = SDL_GetPerformanceCounter();
 			}
 
+			last = now;
+			now = SDL_GetPerformanceCounter();
+			double delta_t = (now - last) / (double) SDL_GetPerformanceFrequency();
+			
 			current_level.update(delta_t);
 			current_level.draw(renderer.get());
 
@@ -63,7 +63,8 @@ namespace Where1::InkBall {
 
 		initialize_textures();
 
-		std::vector<Ball> balls = {Ball(*textures["blue_ball"], Geometry::Vector2<double>{10, 10}, Geometry::Vector2<double>{50, 50})};
+		std::vector<Ball> balls = {
+				Ball(*textures["blue_ball"], Geometry::Vector2<double>{10, 10}, Geometry::Vector2<double>{50, 50})};
 		std::vector<Block> blocks = {Block(*textures["block"], Geometry::Vector2<int>{200, 200})};
 
 		current_level = Level(balls, blocks);
