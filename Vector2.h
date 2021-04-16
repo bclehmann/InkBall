@@ -14,44 +14,48 @@ namespace Where1::Geometry {
 		T x;
 		T y;
 
-		Vector2<T> get_normal_vector(){
-			return Vector2<T>(y, x);
+		Vector2<T> get_normal_vector() const {
+			return Vector2<T>(-y, x);
 		}
 
-		T dot(Vector2<T> &other){
+		T dot(Vector2<T> &other) const {
 			return x * other.x + y * other.y;
 		}
 
-		T magnitude_squared(){
+		T dot(const Vector2<T> &other) const {
+			return x * other.x + y * other.y;
+		}
+
+		T magnitude_squared() const {
 			return dot(*this);
 		}
 
-		T magnitude(){
+		T magnitude() const {
 			return std::sqrt(magnitude_squared());
 		}
 
-		Vector2<T> get_normalized(){
+		Vector2<T> get_normalized() const {
 			T norm = magnitude();
 			return Vector2<T>(x / norm, y / norm);
 		}
 
-		Vector2<T> operator+(Vector2<T> &other){
+		Vector2<T> operator+(Vector2<T> &other) const {
 			return Vector2<T>(x + other.x, y + other.y);
 		}
 
-		Vector2<T> operator+(Vector2<T> &&other){
+		Vector2<T> operator+(Vector2<T> &&other) const {
 			return Vector2<T>(x + other.x, y + other.y);
 		}
 
-		Vector2<T> operator-(Vector2<T> &other){
+		Vector2<T> operator-(Vector2<T> &other) const {
 			return Vector2<T>(x - other.x, y - other.y);
 		}
 
-		Vector2<T> operator-(Vector2<T> &&other){
+		Vector2<T> operator-(Vector2<T> &&other) const {
 			return Vector2<T>(x - other.x, y - other.y);
 		}
 
-		T distance(Vector2<T> &other){
+		T distance(Vector2<T> &other) const {
 			Vector2<T> tmp = (*this - other);
 			return tmp.magnitude_squared();
 		}
