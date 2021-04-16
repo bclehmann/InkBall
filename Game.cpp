@@ -7,14 +7,6 @@ namespace Where1::InkBall {
 		unsigned long long now = SDL_GetPerformanceCounter();
 		unsigned long long last = now;
 
-		InkTrail trail;
-		Geometry::Vector2<double> p{200, 200};
-		trail.append(p);
-		for(int i = 0; i < 400; i++){
-			p = p + Geometry::Vector2<double>{(double)(rand() % 20), (double)(rand() % 20)};
-			trail.append(p);
-		}
-
 		while (!should_quit) {
 			SDL_Event event;
 			while (!should_quit && SDL_PollEvent(&event)) {
@@ -38,9 +30,6 @@ namespace Where1::InkBall {
 			}
 
 			current_level.draw(renderer.get());
-
-			SDL_SetRenderDrawColor(renderer.get(), 0, 0, 0, 255);
-			trail.draw(renderer.get());
 
 			SDL_RenderPresent(renderer.get());
 		}

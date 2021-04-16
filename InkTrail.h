@@ -18,7 +18,7 @@ namespace Where1::InkBall {
 
 	private:
 		std::vector<Geometry::Vector2<double>> points;
-		static const int THICKNESS = 3;
+		//static const int THICKNESS = 3;
 	};
 }
 

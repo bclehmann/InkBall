@@ -57,9 +57,12 @@ namespace Where1::InkBall {
 				inktrails.emplace_back();
 				current_trail = inktrails.end();
 				current_trail--;
+				last_flushed_point = Geometry::Vector2<double>(e.x, e.y);
+				current_trail->append(last_flushed_point);
+			}else if(hypot(last_flushed_point.x - e.x, last_flushed_point.y - e.y) >= MIN_DRAG_DISTANCE){
+				last_flushed_point = Geometry::Vector2<double>(e.x, e.y);
+				current_trail->append(last_flushed_point);
 			}
-
-			current_trail->append(Geometry::Vector2<double>(e.x, e.y));
 		} else {
 			is_drawing_trail = false;
 		}
