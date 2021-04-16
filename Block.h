@@ -26,7 +26,7 @@ namespace Where1::InkBall {
 		SDL_Texture &texture;
 		Geometry::Vector2<double> position;
 
-		static const int padding = 3;
+		static const int PADDING = 3;
 
 	};
 }

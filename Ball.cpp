@@ -23,10 +23,10 @@ namespace Where1::InkBall {
 
 	void Ball::draw(SDL_Renderer *renderer) {
 		SDL_Rect rect{
-				.x = (int) (position.x - radius),
-				.y = (int) (position.y - radius),
-				.w = 2 * radius,
-				.h = 2 * radius
+				.x = (int) (position.x - RADIUS),
+				.y = (int) (position.y - RADIUS),
+				.w = 2 * RADIUS,
+				.h = 2 * RADIUS
 		};
 		SDL_RenderCopy(renderer, &texture, nullptr, &rect);
 	}
@@ -55,7 +55,7 @@ namespace Where1::InkBall {
 
 		Geometry::Vector2<double> tmp(position.x, position.y);
 
-		return closest_point.distance(tmp) <= radius;
+		return closest_point.distance(tmp) <= RADIUS;
 	}
 
 	bool Ball::collides_with(Block &block) {

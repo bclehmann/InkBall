@@ -23,7 +23,7 @@ namespace Where1::InkBall {
 
 		Geometry::Vector2<double> get_velocity() const;
 
-		void update(double timestep);
+		void update(double timestep) override;
 
 		void draw(SDL_Renderer *renderer) override;
 
@@ -42,7 +42,7 @@ namespace Where1::InkBall {
 		Geometry::Vector2<double> position;
 		Geometry::Vector2<double> velocity;
 
-		static const int radius = 16;
+		static const int RADIUS = 16;
 	};
 }
 
