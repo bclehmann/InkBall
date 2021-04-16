@@ -1,4 +1,5 @@
 
+#include <stdexcept>
 #include "Drawing.h"
 
 namespace Where1::SDL_Utilities {
@@ -67,5 +68,25 @@ namespace Where1::SDL_Utilities {
 				SDL_RenderDrawLine(renderer, p1.x, p1.y + i, p2.x, p2.y + i);
 			}
 		}
+	}
+
+	void DrawLines(SDL_Renderer *renderer, std::vector<Geometry::Vector2<double>> points) {
+		SDL_Point *point_array = new SDL_Point[points.size()];
+
+		auto *x = malloc(500);
+		if(x == nullptr){
+			throw x;
+		}
+		if(point_array == nullptr){
+			throw std::runtime_error("Could not allocate array.");
+		}
+
+		for(int i = 0; i < points.size(); i++){
+			point_array[i].x = (int)points[i].x;
+			point_array[i].y = (int)points[i].y;
+		}
+
+		SDL_RenderDrawLines(renderer, point_array, points.size());
+		delete[] point_array;
 	}
 }
