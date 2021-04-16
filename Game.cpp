@@ -1,9 +1,6 @@
 
 #include <iostream>
 #include "Game.h"
-#include "Drawing.h"
-#include "Ball.h"
-#include "InkTrail.h"
 
 namespace Where1::InkBall {
 	void Game::play() {
@@ -58,6 +55,10 @@ namespace Where1::InkBall {
 			case SDL_QUIT:
 				quit();
 				break;
+			case SDL_MOUSEMOTION: {
+				current_level.handle_mouse_move(event.motion);
+				break;
+			}
 			default:
 				//printf("%d\n", event.type);
 				break;

@@ -13,6 +13,11 @@ namespace Where1::InkBall {
 		for (auto &curr : balls) {
 			curr.draw(renderer);
 		}
+
+		for(auto &curr : inktrails){
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+			curr.draw(renderer);
+		}
 	}
 
 	void Level::update(double timestep) {
@@ -41,5 +46,22 @@ namespace Where1::InkBall {
 	Level::Level(std::vector<Ball> balls, std::vector<Block> blocks)
 			: balls(balls), blocks(blocks) {
 
+	}
+
+	void Level::handle_mouse_move(SDL_MouseMotionEvent &e) {
+		bool left_mouse_down = e.state & SDL_BUTTON_LMASK;
+
+		if (left_mouse_down) {
+			if (!is_drawing_trail) {
+				is_drawing_trail = true;
+				inktrails.emplace_back();
+				current_trail = inktrails.end();
+				current_trail--;
+			}
+
+			current_trail->append(Geometry::Vector2<double>(e.x, e.y));
+		} else {
+			is_drawing_trail = false;
+		}
 	}
 }

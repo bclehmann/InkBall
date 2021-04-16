@@ -8,12 +8,14 @@
 #include "SDLTextureDeleter.h"
 #include "Ball.h"
 #include "Level.h"
+#include "InkTrail.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <memory>
 #include <unordered_map>
 #include <vector>
+#include <list>
 
 namespace Where1::InkBall {
 	class Game {
