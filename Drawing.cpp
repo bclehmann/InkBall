@@ -1,5 +1,4 @@
 
-#include <stdexcept>
 #include "Drawing.h"
 
 namespace Where1::SDL_Utilities {
@@ -76,9 +75,6 @@ namespace Where1::SDL_Utilities {
 		auto *x = malloc(500);
 		if(x == nullptr){
 			throw x;
-		}
-		if(point_array == nullptr){
-			throw std::runtime_error("Could not allocate array.");
 		}
 
 		for(int i = 0; i < points.size(); i++){
