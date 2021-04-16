@@ -54,19 +54,6 @@ namespace Where1::SDL_Utilities {
 
 			SDL_RenderDrawLine(renderer, pt1.x, pt1.y, pt2.x, pt2.y);
 		}
-
-		return;;
-
-		double angle = atan2(displacement.y, displacement.x);
-		double angle_mod_90 = remainder(angle, M_PI / 2);
-
-		for(int i = -medium; i <= medium; i++){
-			if(angle_mod_90 >= 0 && angle_mod_90 <= M_PI / 4){
-				SDL_RenderDrawLine(renderer, p1.x + i, p1.y, p2.x + i, p2.y);
-			}else if(angle_mod_90 >= M_PI / 4 && angle_mod_90 <= M_PI / 2){
-				SDL_RenderDrawLine(renderer, p1.x, p1.y + i, p2.x, p2.y + i);
-			}
-		}
 	}
 
 	void DrawLines(SDL_Renderer *renderer, std::vector<Geometry::Vector2<double>> points) {
