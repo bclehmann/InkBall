@@ -24,22 +24,16 @@ namespace Where1::InkBall {
 		for (auto &ball : balls) {
 			ball.update(timestep);
 
-//			Geometry::Line<double> l1(Geometry::Vector2<double>(50, 0), Geometry::Vector2<double>(50, 5000));
-//			Geometry::Line<double> l2(Geometry::Vector2<double>(0, 0), Geometry::Vector2<double>(5000, 0));
-//			Geometry::Line<double> l3(Geometry::Vector2<double>(0, 0), Geometry::Vector2<double>(0, 5000));
-//			Geometry::Line<double> l4(Geometry::Vector2<double>(0, 200), Geometry::Vector2<double>(50, 200));
-//			if (ball.collides_with(l1) || ball.collides_with(l3)) {
-//				ball.reflect(Geometry::Vector2<double>(0, 1));
-//			}
-//
-//			if (ball.collides_with(l2) || ball.collides_with(l4)) {
-//				ball.reflect(Geometry::Vector2<double>(1, 0));
-//			}
-
 			for(auto &block : blocks){
 				ball.reflect_if_collides_with(block);
 			}
 
+			for(auto it = inktrails.begin(); it != inktrails.end(); it++){
+				if(ball.reflect_if_collides_with(*it)){
+					inktrails.erase(it);
+					break; // To avoid reading invalidated references we only let it collide once per update
+				}
+			}
 		}
 	}
 

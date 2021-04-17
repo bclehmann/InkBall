@@ -7,6 +7,7 @@
 #include "Updatable.h"
 #include "Line.h"
 #include "Block.h"
+#include "InkTrail.h"
 
 #include <SDL2/SDL.h>
 
@@ -28,13 +29,16 @@ namespace Where1::InkBall {
 		void draw(SDL_Renderer *renderer) override;
 
 		void reflect(Geometry::Vector2<double> reflection_vector);
+		void reflect(Geometry::Line<double> line);
 
-		bool collides_with(Geometry::Line<double> &line);
+		bool collides_with(Geometry::Line<double> &line, int padding = 0);
 		bool collides_with(Block &block);
+		bool collides_with(InkTrail &inktrail);
 
 		bool is_travelling_towards(Block &block);
 
-		void reflect_if_collides_with(Block &block);
+		bool reflect_if_collides_with(Block &block);
+		bool reflect_if_collides_with(InkTrail &inktrail);
 
 
 	private:

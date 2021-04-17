@@ -38,7 +38,7 @@ namespace Where1::InkBall {
 		velocity = velocity - subtrahend;
 	}
 
-	bool Ball::collides_with(Geometry::Line<double> &line) {
+	bool Ball::collides_with(Geometry::Line<double> &line, int padding) {
 		Geometry::Vector2<double> new_base = position - line.p2;
 		Geometry::Vector2<double> new_p1 = line.p1 - line.p2;
 		double k = new_base.dot(new_p1) / new_p1.magnitude_squared();
@@ -55,7 +55,7 @@ namespace Where1::InkBall {
 
 		Geometry::Vector2<double> tmp(position.x, position.y);
 
-		return closest_point.distance(tmp) <= RADIUS;
+		return closest_point.distance(tmp) <= RADIUS + padding;
 	}
 
 	bool Ball::collides_with(Block &block) {
@@ -67,19 +67,21 @@ namespace Where1::InkBall {
 		return false;
 	}
 
-	void Ball::reflect_if_collides_with(Block &block) {
+	bool Ball::reflect_if_collides_with(Block &block) {
 		// If it's outside the block and this is true it won't collide
 		// If it's inside and this is true then it's leaving and we best not get in its way
 		if(!is_travelling_towards(block)){
-			return;
+			return false;
 		}
 
 		for (auto &line : block.get_bounding_lines()) {
 			if (collides_with(line)) {
 				reflect(line.p2 - line.p1);
-				break;
+				return true;
 			}
 		}
+
+		return false;
 	}
 
 	bool Ball::is_travelling_towards(Block &block) {
@@ -87,5 +89,30 @@ namespace Where1::InkBall {
 		double correlation_coefficient =  displacement.dot(velocity) / (displacement.magnitude() * velocity.magnitude());
 
 		return correlation_coefficient > 0;
+	}
+
+	bool Ball::collides_with(InkTrail &inktrail) {
+		for(auto& line : inktrail.get_lines()){
+			if(collides_with(line, InkTrail::PADDING)){
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	bool Ball::reflect_if_collides_with(InkTrail &inktrail) {
+		for(auto& line : inktrail.get_lines()){
+			if(collides_with(line)){
+				reflect(line);
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	void Ball::reflect(Geometry::Line<double> line) {
+		reflect(line.p2 - line.p1);
 	}
 }
