@@ -27,6 +27,7 @@ namespace Where1::InkBall {
 
 	private:
 		bool is_drawing_trail;
+		bool valid_iterator = false;
 		std::list<InkTrail> inktrails;
 		std::list<InkTrail>::iterator current_trail;
 		Geometry::Vector2<double> last_flushed_point{0,0};

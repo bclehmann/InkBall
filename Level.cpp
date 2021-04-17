@@ -31,6 +31,7 @@ namespace Where1::InkBall {
 			for(auto it = inktrails.begin(); it != inktrails.end(); it++){
 				if(ball.reflect_if_collides_with(*it)){
 					inktrails.erase(it);
+					valid_iterator = false;
 					break; // To avoid reading invalidated references we only let it collide once per update
 				}
 			}
@@ -46,8 +47,9 @@ namespace Where1::InkBall {
 		bool left_mouse_down = e.state & SDL_BUTTON_LMASK;
 
 		if (left_mouse_down) {
-			if (!is_drawing_trail) {
+			if (!is_drawing_trail || !valid_iterator) {
 				is_drawing_trail = true;
+				valid_iterator = true;
 				inktrails.emplace_back();
 				current_trail = inktrails.end();
 				current_trail--;
