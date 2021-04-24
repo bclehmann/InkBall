@@ -7,7 +7,11 @@ set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 include_directories(${PROJECT_SOURCE_DIR}/include)
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 
-add_executable(InkBall main.cpp SDLWindowDeleter.cpp SDLWindowDeleter.h Game.cpp Game.h SDLError.h SDLRendererDeleter.cpp SDLRendererDeleter.h SDLTextureDeleter.cpp SDLTextureDeleter.h Drawing.cpp Drawing.h Vector2.h Ball.cpp Ball.h Level.cpp Level.h Block.cpp Block.h Renderable.h Updatable.h Line.h InkTrail.cpp InkTrail.h)
+add_executable(InkBall src/main.cpp src/SDLWindowDeleter.cpp src/SDLWindowDeleter.h src/Game.cpp src/Game.h
+        src/SDLError.h src/SDLRendererDeleter.cpp src/SDLRendererDeleter.h src/SDLTextureDeleter.cpp
+        src/SDLTextureDeleter.h src/Drawing.cpp src/Drawing.h src/Vector2.h src/Ball.cpp src/Ball.h src/Level.cpp
+        src/Level.h src/Block.cpp src/Block.h src/Renderable.h src/Updatable.h src/Line.h src/InkTrail.cpp
+        src/InkTrail.h)
 
 target_link_libraries(InkBall mingw32 SDL2main SDL2 SDL2_image)
 
