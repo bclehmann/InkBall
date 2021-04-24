@@ -59,11 +59,6 @@ namespace Where1::SDL_Utilities {
 	void DrawLines(SDL_Renderer *renderer, std::vector<Geometry::Vector2<double>> points) {
 		SDL_Point *point_array = new SDL_Point[points.size()];
 
-		auto *x = malloc(500);
-		if(x == nullptr){
-			throw x;
-		}
-
 		for(int i = 0; i < points.size(); i++){
 			point_array[i].x = (int)points[i].x;
 			point_array[i].y = (int)points[i].y;
