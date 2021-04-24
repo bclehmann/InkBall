@@ -2,6 +2,17 @@
 
 This is an InkBall game that's still in development. It doesn't use any game engine, it's just built on top of SDL (which was a big mistake).
 
+# So Far
+
+I have working collisions and you can draw an ink trail which the balls interact with:
+
+![Sample Image](https://raw.githubusercontent.com/bclehmann/InkBall/master/demo/smiley.png)
+
+Todo:
+- Pockets and scoring
+- Level loading (it's hardcoded right now to one level)
+- Level creation (maybe)
+
 # Building
 
 These are not full instructions. I will revisit this once the game is finished.
