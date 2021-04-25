@@ -5,6 +5,7 @@
 #include "Ball.h"
 #include "Block.h"
 #include "InkTrail.h"
+#include "Pocket.h"
 
 #include <vector>
 #include <list>
@@ -14,10 +15,11 @@ namespace Where1::InkBall {
 	public:
 		Level() = default;
 
-		Level(std::vector<Ball> balls, std::vector<Block> blocks);
+		Level(std::vector<Ball> balls, std::vector<Block> blocks, std::vector<Pocket> pockets);
 
 		std::vector<Ball> balls;
 		std::vector<Block> blocks;
+		std::vector<Pocket> pockets;
 
 		void draw(SDL_Renderer *renderer) override;
 

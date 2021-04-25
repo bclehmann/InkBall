@@ -11,7 +11,7 @@ add_executable(InkBall src/main.cpp src/SDLWindowDeleter.cpp src/SDLWindowDelete
         src/SDLError.h src/SDLRendererDeleter.cpp src/SDLRendererDeleter.h src/SDLTextureDeleter.cpp
         src/SDLTextureDeleter.h src/Drawing.cpp src/Drawing.h src/Vector2.h src/Ball.cpp src/Ball.h src/Level.cpp
         src/Level.h src/Block.cpp src/Block.h src/Renderable.h src/Updatable.h src/Line.h src/InkTrail.cpp
-        src/InkTrail.h)
+        src/InkTrail.h src/Pocket.cpp src/Pocket.h src/Collidable.h src/BoxCollidable.h)
 
 target_link_libraries(InkBall mingw32 SDL2main SDL2 SDL2_image)
 

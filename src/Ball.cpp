@@ -58,8 +58,8 @@ namespace Where1::InkBall {
 		return closest_point.distance(tmp) <= RADIUS + padding;
 	}
 
-	bool Ball::collides_with(Block &block) {
-		for (auto &line : block.get_bounding_lines()) {
+	bool Ball::collides_with(BoxCollidable<double> &box) {
+		for (auto &line : box.get_bounding_lines()) {
 			if (collides_with(line)) {
 				return true;
 			}
@@ -67,14 +67,14 @@ namespace Where1::InkBall {
 		return false;
 	}
 
-	bool Ball::reflect_if_collides_with(Block &block) {
+	bool Ball::reflect_if_collides_with(BoxCollidable<double> &box) {
 		// If it's outside the block and this is true it won't collide
 		// If it's inside and this is true then it's leaving and we best not get in its way
-		if(!is_travelling_towards(block)){
+		if(!is_travelling_towards(box)){
 			return false;
 		}
 
-		for (auto &line : block.get_bounding_lines()) {
+		for (auto &line : box.get_bounding_lines()) {
 			if (collides_with(line)) {
 				reflect(line.p2 - line.p1);
 				return true;
@@ -84,15 +84,15 @@ namespace Where1::InkBall {
 		return false;
 	}
 
-	bool Ball::is_travelling_towards(Block &block) {
-		Geometry::Vector2<double> displacement = block.get_position() + Geometry::Vector2<double>(Block::width / 2.0, Block::width / 2.0) - position;
+	bool Ball::is_travelling_towards(BoxCollidable<double> &box) {
+		Geometry::Vector2<double> displacement = box.get_centre() - position;
 		double correlation_coefficient =  displacement.dot(velocity) / (displacement.magnitude() * velocity.magnitude());
 
 		return correlation_coefficient > 0;
 	}
 
 	bool Ball::collides_with(InkTrail &inktrail) {
-		for(auto& line : inktrail.get_lines()){
+		for(auto& line : inktrail.get_bounding_lines()){
 			if(collides_with(line, InkTrail::PADDING)){
 				return true;
 			}
@@ -102,7 +102,7 @@ namespace Where1::InkBall {
 	}
 
 	bool Ball::reflect_if_collides_with(InkTrail &inktrail) {
-		for(auto& line : inktrail.get_lines()){
+		for(auto& line : inktrail.get_bounding_lines()){
 			if(collides_with(line)){
 				reflect(line);
 				return true;

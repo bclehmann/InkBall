@@ -10,6 +10,10 @@ namespace Where1::InkBall {
 			curr.draw(renderer);
 		}
 
+		for(auto &curr : pockets){
+			curr.draw(renderer);
+		}
+
 		for (auto &curr : balls) {
 			curr.draw(renderer);
 		}
@@ -38,8 +42,8 @@ namespace Where1::InkBall {
 		}
 	}
 
-	Level::Level(std::vector<Ball> balls, std::vector<Block> blocks)
-			: balls(balls), blocks(blocks) {
+	Level::Level(std::vector<Ball> balls, std::vector<Block> blocks, std::vector<Pocket> pockets)
+			: balls(balls), blocks(blocks), pockets(pockets) {
 
 	}
 

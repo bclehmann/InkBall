@@ -32,12 +32,12 @@ namespace Where1::InkBall {
 		void reflect(Geometry::Line<double> line);
 
 		bool collides_with(Geometry::Line<double> &line, int padding = 0);
-		bool collides_with(Block &block);
+		bool collides_with(BoxCollidable<double> &box);
 		bool collides_with(InkTrail &inktrail);
 
-		bool is_travelling_towards(Block &block);
+		bool is_travelling_towards(BoxCollidable<double> &box);
 
-		bool reflect_if_collides_with(Block &block);
+		bool reflect_if_collides_with(BoxCollidable<double> &box);
 		bool reflect_if_collides_with(InkTrail &inktrail);
 
 

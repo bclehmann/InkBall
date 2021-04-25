@@ -46,6 +46,10 @@ namespace Where1::InkBall {
 			{"grey_ball", "grey_ball.png"},
 			{"orange_ball", "orange_ball.png"},
 			{"pink_ball", "pink_ball.png"},
+			{"grey_pocket", "grey_pocket.png"},
+			{"blue_pocket", "blue_pocket.png"},
+			{"pink_pocket", "pink_pocket.png"},
+			{"orange_pocket", "orange_pocket.png"},
 		};
 
 		Level current_level;

@@ -2,6 +2,8 @@
 #ifndef INKBALL_LINE_H
 #define INKBALL_LINE_H
 
+#include <utility>
+
 namespace Where1::Geometry {
 	template<typename T>
 	class Line {

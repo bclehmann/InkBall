@@ -8,6 +8,8 @@ namespace Where1::Geometry {
 	template<typename T>
 	class Vector2 {
 	public:
+		Vector2() = default;
+
 		Vector2(T x, T y)
 				: x(x), y(y) {}
 

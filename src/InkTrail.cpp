@@ -14,7 +14,7 @@ namespace Where1::InkBall {
 		points.push_back(point);
 	}
 
-	std::vector<Geometry::Line<double>> InkTrail::get_lines() {
+	std::vector<Geometry::Line<double>> InkTrail::get_bounding_lines() {
 		std::vector<Geometry::Line<double>> output;
 
 		if(points.empty()){

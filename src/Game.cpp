@@ -83,17 +83,19 @@ namespace Where1::InkBall {
 		};
 		std::vector<Block> blocks = {Block(*textures["block"], Geometry::Vector2<double>{200, 200})};
 
-		for(int i = 0; i < 600 - Block::width; i += Block::width){
+		for(int i = 0; i < 600 - Block::SIZE ; i += Block::SIZE){
 			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(0, i));
-			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(480 - Block::width, i));
+			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(480 - Block::SIZE, i));
 		}
 
-		for(int i = 0; i <= 480; i += Block::width){
+		for(int i = 0; i <= 480; i += Block::SIZE){
 			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(i, 0));
-			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(i, 600 - Block::width));
+			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(i, 600 - Block::SIZE));
 		}
 
-		current_level = Level(balls, blocks);
+		std::vector<Pocket> pockets{Pocket(*textures["grey_pocket"], Geometry::Vector2<double>(200, 300))};
+
+		current_level = Level(balls, blocks, pockets);
 	}
 
 	Game::~Game() {

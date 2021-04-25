@@ -31,6 +31,10 @@ namespace Where1::InkBall {
 			return {l1, l2, l3, l4};
 		}
 
+		Geometry::Vector2<T> get_centre() {
+			return get_position() + Geometry::Vector2<double>(get_width() / (T)2, get_height() / (T)2);
+		}
+
 		virtual Geometry::Vector2<T> get_position() = 0;
 
 		virtual T get_padding() = 0;

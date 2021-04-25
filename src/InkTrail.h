@@ -6,11 +6,12 @@
 #include "Renderable.h"
 #include "Updatable.h"
 #include "Drawing.h"
+#include "Collidable.h"
 
 #include <vector>
 
 namespace Where1::InkBall {
-	class InkTrail : public Renderable {
+	class InkTrail : public Renderable, public Collidable<double> {
 	public:
 		InkTrail() = default;
 
@@ -18,7 +19,8 @@ namespace Where1::InkBall {
 
 		void append(Geometry::Vector2<double> point);
 
-		std::vector<Geometry::Line<double>> get_lines();
+		virtual std::vector<Geometry::Line<double>> get_bounding_lines() override;
+
 		static const int PADDING = 3;
 	private:
 		std::vector<Geometry::Vector2<double>> points;
