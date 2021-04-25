@@ -8,6 +8,7 @@
 #include "Line.h"
 #include "Block.h"
 #include "InkTrail.h"
+#include "Color.h"
 
 #include <SDL2/SDL.h>
 
@@ -17,8 +18,7 @@
 namespace Where1::InkBall {
 	class Ball : public Renderable, public Updatable {
 	public:
-		Ball(SDL_Texture &texture, Geometry::Vector2<double> position,
-			 Geometry::Vector2<double> velocity);
+		Ball(SDL_Texture &texture, Geometry::Vector2<double> position, Geometry::Vector2<double> velocity, Color ball_color);
 
 		Geometry::Vector2<double> get_position() const;
 
@@ -39,6 +39,8 @@ namespace Where1::InkBall {
 
 		bool reflect_if_collides_with(BoxCollidable<double> &box);
 		bool reflect_if_collides_with(InkTrail &inktrail);
+
+		const Color color;
 
 
 	private:

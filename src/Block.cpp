@@ -3,9 +3,7 @@
 
 namespace Where1::InkBall {
 	Block::Block(SDL_Texture &texture, Geometry::Vector2<double> position)
-	: texture(texture)
-	, position(position)
-	{
+			: texture(texture), position(position) {
 
 	}
 
@@ -15,10 +13,10 @@ namespace Where1::InkBall {
 
 	void Block::draw(SDL_Renderer *renderer) {
 		SDL_Rect rect{
-			.x = (int)position.x,
-			.y = (int)position.y,
-			.w = WIDTH,
-			.h = WIDTH
+				.x = (int) position.x,
+				.y = (int) position.y,
+				.w = WIDTH,
+				.h = WIDTH
 		};
 		SDL_RenderCopy(renderer, &texture, nullptr, &rect);
 	}

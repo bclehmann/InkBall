@@ -2,9 +2,8 @@
 #include "Ball.h"
 
 namespace Where1::InkBall {
-	Ball::Ball(SDL_Texture &texture, Geometry::Vector2<double> position,
-			   Geometry::Vector2<double> velocity)
-			: texture(texture), position(position), velocity(velocity) {
+	Ball::Ball(SDL_Texture &texture, Geometry::Vector2<double> position, Geometry::Vector2<double> velocity, Color ball_color)
+			: texture(texture), position(position), velocity(velocity), color(ball_color) {
 
 	}
 
@@ -70,7 +69,7 @@ namespace Where1::InkBall {
 	bool Ball::reflect_if_collides_with(BoxCollidable<double> &box) {
 		// If it's outside the block and this is true it won't collide
 		// If it's inside and this is true then it's leaving and we best not get in its way
-		if(!is_travelling_towards(box)){
+		if (!is_travelling_towards(box)) {
 			return false;
 		}
 
@@ -86,14 +85,14 @@ namespace Where1::InkBall {
 
 	bool Ball::is_travelling_towards(BoxCollidable<double> &box) {
 		Geometry::Vector2<double> displacement = box.get_centre() - position;
-		double correlation_coefficient =  displacement.dot(velocity) / (displacement.magnitude() * velocity.magnitude());
+		double correlation_coefficient = displacement.dot(velocity) / (displacement.magnitude() * velocity.magnitude());
 
 		return correlation_coefficient > 0;
 	}
 
 	bool Ball::collides_with(InkTrail &inktrail) {
-		for(auto& line : inktrail.get_bounding_lines()){
-			if(collides_with(line, InkTrail::PADDING)){
+		for (auto &line : inktrail.get_bounding_lines()) {
+			if (collides_with(line, InkTrail::PADDING)) {
 				return true;
 			}
 		}
@@ -102,8 +101,8 @@ namespace Where1::InkBall {
 	}
 
 	bool Ball::reflect_if_collides_with(InkTrail &inktrail) {
-		for(auto& line : inktrail.get_bounding_lines()){
-			if(collides_with(line)){
+		for (auto &line : inktrail.get_bounding_lines()) {
+			if (collides_with(line)) {
 				reflect(line);
 				return true;
 			}

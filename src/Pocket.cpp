@@ -1,17 +1,16 @@
 
 #include "Pocket.h"
 
-namespace Where1::InkBall{
-	Pocket::Pocket(SDL_Texture &texture, Geometry::Vector2<double> position)
-	: texture(texture), position(position)
-	{
+namespace Where1::InkBall {
+	Pocket::Pocket(SDL_Texture &texture, Geometry::Vector2<double> position, Color color)
+			: texture(texture), position(position), color(color) {
 
 	}
 
 	void Pocket::draw(SDL_Renderer *renderer) {
 		SDL_Rect rect{
-				.x = (int)position.x,
-				.y = (int)position.y,
+				.x = (int) position.x,
+				.y = (int) position.y,
 				.w = WIDTH,
 				.h = HEIGHT
 		};
