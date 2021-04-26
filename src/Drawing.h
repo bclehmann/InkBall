@@ -15,6 +15,7 @@ namespace Where1::SDL_Utilities{
 	void DrawLine(SDL_Renderer *renderer, Geometry::Vector2<double> p1, Geometry::Vector2<double> p2, int thickness);
 	void DrawLine(SDL_Renderer *renderer, Geometry::Line<double> line, int thickness);
 	void DrawLines(SDL_Renderer *renderer, std::vector<Geometry::Vector2<double>> points);
+	void WriteText(SDL_Renderer *renderer, Geometry::Vector2<double> position, std::string text, int size, uint8_t red, uint8_t blue, uint8_t green);
 }
 
 #endif //INKBALL_DRAWING_H

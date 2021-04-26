@@ -1,6 +1,6 @@
 Needs:
 - SDL2
-- SDL Image
+- SDL Image, SDL TTF
     - zlib
     - libjpeg, libpng, libtiff, libwebp, etc etc
 

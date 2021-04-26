@@ -1,5 +1,8 @@
 
+#include <sstream>
 #include "Level.h"
+
+#include "Game.h"
 
 namespace Where1::InkBall {
 	void Level::draw(SDL_Renderer *renderer) {
@@ -22,6 +25,10 @@ namespace Where1::InkBall {
 			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 			curr.draw(renderer);
 		}
+
+		std::stringstream score_text_stream;
+		score_text_stream << "Score: " << score;
+		SDL_Utilities::WriteText(renderer, {0, 0}, score_text_stream.str(), Game::TOP_BAR_HEIGHT - 4, 0, 0, 0);
 	}
 
 	void Level::update(double timestep) {

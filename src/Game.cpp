@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Game.h"
 
+#include <SDL2/SDL_ttf.h>
+
 namespace Where1::InkBall {
 	void Game::play() {
 		unsigned long long now = SDL_GetPerformanceCounter();
@@ -56,11 +58,12 @@ namespace Where1::InkBall {
 
 	Game::Game() {
 		window = std::unique_ptr<SDL_Window, SDL_Utilities::SDLWindowDeleter>(
-				SDL_CreateWindow("InkBall", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 480, 600,
+				SDL_CreateWindow("InkBall", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT,
 								 SDL_WINDOW_OPENGL));
 
 
 		SDL_Init(SDL_INIT_VIDEO);
+		TTF_Init();
 
 		if (!window) {
 			throw SDL_Utilities::SDLError("Could not create Game window:");
@@ -83,14 +86,14 @@ namespace Where1::InkBall {
 		};
 		std::vector<Block> blocks = {Block(*textures["block"], Geometry::Vector2<double>{200, 200})};
 
-		for (int i = 0; i < 600 - Block::SIZE; i += Block::SIZE) {
+		for (int i = TOP_BAR_HEIGHT; i < HEIGHT - Block::SIZE; i += Block::SIZE) {
 			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(0, i));
-			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(480 - Block::SIZE, i));
+			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(WIDTH - Block::SIZE, i));
 		}
 
-		for (int i = 0; i <= 480; i += Block::SIZE) {
-			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(i, 0));
-			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(i, 600 - Block::SIZE));
+		for (int i = 0; i <= WIDTH; i += Block::SIZE) {
+			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(i, TOP_BAR_HEIGHT));
+			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(i, HEIGHT - Block::SIZE));
 		}
 
 		std::vector<Pocket> pockets{Pocket(*textures["grey_pocket"], Geometry::Vector2<double>(200, 300), Color::Grey)};
@@ -99,6 +102,7 @@ namespace Where1::InkBall {
 	}
 
 	Game::~Game() {
+		TTF_Quit();
 		SDL_Quit();
 	}
 

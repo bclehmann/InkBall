@@ -34,6 +34,7 @@ namespace Where1::InkBall {
 		std::list<InkTrail>::iterator current_trail;
 		Geometry::Vector2<double> last_flushed_point{0,0};
 		constexpr static const double MIN_DRAG_DISTANCE = 10;
+		int score = 0;
 	};
 }
 

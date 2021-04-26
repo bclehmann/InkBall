@@ -28,6 +28,10 @@ namespace Where1::InkBall {
 
 		void quit();
 
+		static const unsigned int TOP_BAR_HEIGHT = 30;
+		static const unsigned int HEIGHT = 600 + TOP_BAR_HEIGHT;
+		static const unsigned int WIDTH = 480;
+
 	private:
 		void handle_event(SDL_Event &event);
 

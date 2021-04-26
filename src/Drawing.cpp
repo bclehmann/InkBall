@@ -1,6 +1,8 @@
 
 #include "Drawing.h"
 
+#include <SDL2/SDL_ttf.h>
+
 namespace Where1::SDL_Utilities {
 	int CircleError(int x, int y, int r) {
 		return r * r - x * x - y * y;
@@ -66,5 +68,45 @@ namespace Where1::SDL_Utilities {
 
 		SDL_RenderDrawLines(renderer, point_array, points.size());
 		delete[] point_array;
+	}
+
+	void WriteText(SDL_Renderer *renderer, Geometry::Vector2<double> position, std::string text, int size, uint8_t red, uint8_t blue, uint8_t green) {
+		TTF_Font *sans = TTF_OpenFont("assets/LiberationSans-Regular.ttf", size);
+
+		if(sans == nullptr){
+			throw SDLError("Could not open font:");
+		}
+
+		SDL_Color color = {red, green, blue};
+
+		SDL_Surface *surface = TTF_RenderText_Solid(sans, text.c_str(), color);
+
+		TTF_CloseFont(sans);
+		sans = nullptr;
+
+		if(surface == nullptr){
+			throw SDLError("Could not write text to surface:");
+		}
+
+		SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+		SDL_Rect rect {
+				.x = (int)position.x,
+				.y = (int)position.y,
+				.w = surface->w,
+				.h = surface->h
+		};
+
+		SDL_FreeSurface(surface);
+		surface = nullptr;
+
+		if(texture == nullptr){
+			throw SDLError("Could not create texture");
+		}
+
+		SDL_RenderCopy(renderer, texture, nullptr, &rect);
+
+		SDL_DestroyTexture(texture);
+		texture = nullptr;
 	}
 }

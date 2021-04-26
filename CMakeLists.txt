@@ -13,6 +13,6 @@ add_executable(InkBall src/main.cpp src/SDLWindowDeleter.cpp src/SDLWindowDelete
         src/Level.h src/Block.cpp src/Block.h src/Renderable.h src/Updatable.h src/Line.h src/InkTrail.cpp
         src/InkTrail.h src/Pocket.cpp src/Pocket.h src/Collidable.h src/BoxCollidable.h src/Color.h)
 
-target_link_libraries(InkBall mingw32 SDL2main SDL2 SDL2_image)
+target_link_libraries(InkBall mingw32 SDL2main SDL2 SDL2_image SDL2_ttf)
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
