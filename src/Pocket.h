@@ -33,7 +33,7 @@ namespace Where1::InkBall {
 	private:
 		SDL_Texture &texture;
 		Geometry::Vector2<double> position;
-		static const int PADDING = 0;
+		static const int PADDING = 3;
 	};
 };
 
