@@ -9,9 +9,9 @@ I have working collisions and you can draw an ink trail which the balls interact
 ![Sample Image](https://raw.githubusercontent.com/bclehmann/InkBall/master/demo/smiley.png)
 
 Todo:
-- Pockets and scoring
-- Level loading (it's hardcoded right now to one level)
-- Level creation (maybe)
+- [x] Pockets and scoring
+- [ ] Level loading (it's hardcoded right now to one level)
+- [ ] Level creation (maybe)
 
 # Building
 
