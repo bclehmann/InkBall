@@ -2,9 +2,14 @@
 #include <sstream>
 #include "Level.h"
 
-#include "Game.h"
+#include "Color.h"
 
 namespace Where1::InkBall {
+
+	bool are_colors_compatible(Color color1, Color color2){
+		return color1 == color2 || color1 == Color::Grey || color2 == Color::Grey;
+	}
+
 	void Level::draw(SDL_Renderer *renderer) {
 		SDL_SetRenderDrawColor(renderer, 230, 230, 230, SDL_ALPHA_OPAQUE);
 		SDL_RenderClear(renderer);
@@ -39,6 +44,18 @@ namespace Where1::InkBall {
 				ball.reflect_if_collides_with(block);
 			}
 
+			for(auto &pocket : pockets){
+				if(ball.collides_with(pocket) && are_colors_compatible(ball.color, pocket.color)){
+					ball.remove();
+
+					if(ball.color == pocket.color){
+						score += 100;
+					}
+				}else{
+					game.lose();
+				}
+			}
+
 			for(auto it = inktrails.begin(); it != inktrails.end(); it++){
 				if(ball.reflect_if_collides_with(*it)){
 					inktrails.erase(it);
@@ -49,8 +66,8 @@ namespace Where1::InkBall {
 		}
 	}
 
-	Level::Level(std::vector<Ball> balls, std::vector<Block> blocks, std::vector<Pocket> pockets)
-			: balls(balls), blocks(blocks), pockets(pockets) {
+	Level::Level(std::vector<Ball> balls, std::vector<Block> blocks, std::vector<Pocket> pockets, Game &game)
+			: balls(balls), blocks(blocks), pockets(pockets), game(game) {
 
 	}
 
