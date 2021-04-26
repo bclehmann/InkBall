@@ -19,7 +19,7 @@ namespace Where1::InkBall {
 
 		void append(Geometry::Vector2<double> point);
 
-		virtual std::vector<Geometry::Line<double>> get_bounding_lines() override;
+		std::vector<Geometry::Line<double>> get_bounding_lines() override;
 
 		static const int PADDING = 3;
 	private:

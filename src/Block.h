@@ -16,10 +16,13 @@ namespace Where1::InkBall {
 	public:
 		Block(SDL_Texture &texture, Geometry::Vector2<double> position);
 
-		virtual Geometry::Vector2<double> get_position() override;
-		virtual double get_padding() override;
-		virtual double get_width() override;
-		virtual double get_height() override;
+		Geometry::Vector2<double> get_position() override;
+
+		double get_padding() override;
+
+		double get_width() override;
+
+		double get_height() override;
 
 		void draw(SDL_Renderer *renderer) override;
 
