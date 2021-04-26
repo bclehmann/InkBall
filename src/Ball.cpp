@@ -16,11 +16,19 @@ namespace Where1::InkBall {
 	}
 
 	void Ball::update(double timestep) {
+		if(removed){
+			return;
+		}
+
 		position.x += timestep * velocity.x;
 		position.y += timestep * velocity.y;
 	}
 
 	void Ball::draw(SDL_Renderer *renderer) {
+		if(removed){
+			return;
+		}
+
 		SDL_Rect rect{
 				.x = (int) (position.x - RADIUS),
 				.y = (int) (position.y - RADIUS),
@@ -38,6 +46,10 @@ namespace Where1::InkBall {
 	}
 
 	bool Ball::collides_with(Geometry::Line<double> &line, int padding) {
+		if(removed){
+			return false;
+		}
+
 		Geometry::Vector2<double> new_base = position - line.p2;
 		Geometry::Vector2<double> new_p1 = line.p1 - line.p2;
 		double k = new_base.dot(new_p1) / new_p1.magnitude_squared();
@@ -58,6 +70,10 @@ namespace Where1::InkBall {
 	}
 
 	bool Ball::collides_with(BoxCollidable<double> &box) {
+		if(removed){
+			return false;
+		}
+
 		for (auto &line : box.get_bounding_lines()) {
 			if (collides_with(line)) {
 				return true;
@@ -84,6 +100,10 @@ namespace Where1::InkBall {
 	}
 
 	bool Ball::is_travelling_towards(BoxCollidable<double> &box) {
+		if(removed){
+			return false;
+		}
+
 		Geometry::Vector2<double> displacement = box.get_centre() - position;
 		double correlation_coefficient = displacement.dot(velocity) / (displacement.magnitude() * velocity.magnitude());
 
@@ -91,6 +111,10 @@ namespace Where1::InkBall {
 	}
 
 	bool Ball::collides_with(InkTrail &inktrail) {
+		if(removed){
+			return false;
+		}
+
 		for (auto &line : inktrail.get_bounding_lines()) {
 			if (collides_with(line, InkTrail::PADDING)) {
 				return true;
@@ -113,5 +137,9 @@ namespace Where1::InkBall {
 
 	void Ball::reflect(Geometry::Line<double> line) {
 		reflect(line.p2 - line.p1);
+	}
+
+	void Ball::remove() {
+		removed = true;
 	}
 }

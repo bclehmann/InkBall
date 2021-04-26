@@ -40,6 +40,8 @@ namespace Where1::InkBall {
 		bool reflect_if_collides_with(BoxCollidable<double> &box);
 		bool reflect_if_collides_with(InkTrail &inktrail);
 
+		void remove();
+
 		const Color color;
 
 
@@ -47,6 +49,7 @@ namespace Where1::InkBall {
 		SDL_Texture &texture;
 		Geometry::Vector2<double> position;
 		Geometry::Vector2<double> velocity;
+		bool removed = false;
 
 		static const int RADIUS = 16;
 	};

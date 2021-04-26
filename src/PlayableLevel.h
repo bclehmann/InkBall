@@ -1,12 +1,13 @@
 
-#ifndef INKBALL_LEVEL_H
-#define INKBALL_LEVEL_H
+#ifndef INKBALL_PLAYABLELEVEL_H
+#define INKBALL_PLAYABLELEVEL_H
 
 #include "Ball.h"
 #include "Block.h"
 #include "InkTrail.h"
 #include "Pocket.h"
 #include "Game.h"
+#include "Level.h"
 
 #include <vector>
 #include <list>
@@ -15,9 +16,9 @@
 namespace Where1::InkBall {
 	class Game;
 
-	class Level : public Renderable, public Updatable {
+	class PlayableLevel : public Level {
 	public:
-		Level(std::vector<Ball> balls, std::vector<Block> blocks, std::vector<Pocket> pockets, Game &game);
+		PlayableLevel(std::vector<Ball> balls, std::vector<Block> blocks, std::vector<Pocket> pockets, Game &game);
 
 		std::vector<Ball> balls;
 		std::vector<Block> blocks;
@@ -27,7 +28,7 @@ namespace Where1::InkBall {
 
 		void update(double timestep) override;
 
-		void handle_mouse_move(SDL_MouseMotionEvent &e);
+		void handle_mouse_move(SDL_MouseMotionEvent &e) override;
 
 	private:
 		bool is_drawing_trail;
@@ -42,4 +43,4 @@ namespace Where1::InkBall {
 	};
 }
 
-#endif //INKBALL_LEVEL_H
+#endif //INKBALL_PLAYABLELEVEL_H

@@ -7,7 +7,7 @@
 #include "SDLRendererDeleter.h"
 #include "SDLTextureDeleter.h"
 #include "Ball.h"
-#include "Level.h"
+#include "PlayableLevel.h"
 #include "InkTrail.h"
 
 #include <SDL2/SDL.h>
@@ -16,6 +16,8 @@
 #include <unordered_map>
 #include <vector>
 #include <list>
+
+class Level;
 
 namespace Where1::InkBall {
 	class Game {
@@ -27,6 +29,8 @@ namespace Where1::InkBall {
 		void play();
 
 		void quit();
+
+		void lose();
 
 		static const unsigned int TOP_BAR_HEIGHT = 30;
 		static const unsigned int HEIGHT = 600 + TOP_BAR_HEIGHT;
@@ -56,7 +60,7 @@ namespace Where1::InkBall {
 			{"orange_pocket", "orange_pocket.png"},
 		};
 
-		Level current_level;
+		std::unique_ptr<Level> current_level;
 	};
 }
 

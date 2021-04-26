@@ -109,4 +109,18 @@ namespace Where1::SDL_Utilities {
 		SDL_DestroyTexture(texture);
 		texture = nullptr;
 	}
+
+	std::pair<int, int> GetStringSize(std::string text, int size) {
+		TTF_Font *sans = TTF_OpenFont("assets/LiberationSans-Regular.ttf", size);
+
+		if(sans == nullptr){
+			throw SDLError("Could not open font:");
+		}
+
+		int w, h;
+
+		TTF_SizeText(sans, text.c_str(), &w, &h);
+
+		return std::make_pair(w, h);
+	}
 }

@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include "Game.h"
+#include "GameOverLevel.h"
 
 #include <SDL2/SDL_ttf.h>
 
@@ -24,14 +25,14 @@ namespace Where1::InkBall {
 
 			while (delta_t > 1 / 60.0) {
 				delta_t -= max_timestep;
-				current_level.update(max_timestep);
+				current_level->update(max_timestep);
 			}
 
 			if (delta_t > 0) {
-				current_level.update(delta_t);
+				current_level->update(delta_t);
 			}
 
-			current_level.draw(renderer.get());
+			current_level->draw(renderer.get());
 
 			SDL_RenderPresent(renderer.get());
 		}
@@ -47,7 +48,7 @@ namespace Where1::InkBall {
 				quit();
 				break;
 			case SDL_MOUSEMOTION: {
-				current_level.handle_mouse_move(event.motion);
+				current_level->handle_mouse_move(event.motion);
 				break;
 			}
 			default:
@@ -79,12 +80,12 @@ namespace Where1::InkBall {
 		initialize_textures();
 
 		std::vector<Ball> balls = {
-				Ball(*textures["grey_ball"], Geometry::Vector2<double>{70, 70}, Geometry::Vector2<double>{50, 50}, Color::Grey),
-				Ball(*textures["blue_ball"], Geometry::Vector2<double>{70, 70}, Geometry::Vector2<double>{-50, -50}, Color::Blue),
-				Ball(*textures["orange_ball"], Geometry::Vector2<double>{70, 70}, Geometry::Vector2<double>{20, -50}, Color::Orange),
-				Ball(*textures["pink_ball"], Geometry::Vector2<double>{70, 70}, Geometry::Vector2<double>{-50, 20}, Color::Pink),
+				Ball(*textures["grey_ball"], Geometry::Vector2<double>{70, 70 + TOP_BAR_HEIGHT}, Geometry::Vector2<double>{50, 50}, Color::Grey),
+				Ball(*textures["blue_ball"], Geometry::Vector2<double>{70, 70 + TOP_BAR_HEIGHT}, Geometry::Vector2<double>{-50, -50}, Color::Blue),
+				Ball(*textures["orange_ball"], Geometry::Vector2<double>{70, 70 + TOP_BAR_HEIGHT}, Geometry::Vector2<double>{20, -50}, Color::Orange),
+				Ball(*textures["pink_ball"], Geometry::Vector2<double>{70, 70 + TOP_BAR_HEIGHT}, Geometry::Vector2<double>{-50, 20}, Color::Pink),
 		};
-		std::vector<Block> blocks = {Block(*textures["block"], Geometry::Vector2<double>{200, 200})};
+		std::vector<Block> blocks = {Block(*textures["block"], Geometry::Vector2<double>{200, 200 + TOP_BAR_HEIGHT})};
 
 		for (int i = TOP_BAR_HEIGHT; i < HEIGHT - Block::SIZE; i += Block::SIZE) {
 			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(0, i));
@@ -96,9 +97,12 @@ namespace Where1::InkBall {
 			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(i, HEIGHT - Block::SIZE));
 		}
 
-		std::vector<Pocket> pockets{Pocket(*textures["grey_pocket"], Geometry::Vector2<double>(200, 300), Color::Grey)};
+		std::vector<Pocket> pockets{
+				Pocket(*textures["pink_pocket"], Geometry::Vector2<double>(200, 300 + TOP_BAR_HEIGHT), Color::Pink),
+				Pocket(*textures["grey_pocket"], Geometry::Vector2<double>(200, 400 + TOP_BAR_HEIGHT), Color::Grey)
+		};
 
-		current_level = Level(balls, blocks, pockets);
+		current_level = std::make_unique<PlayableLevel>(balls, blocks, pockets, *this);
 	}
 
 	Game::~Game() {
@@ -130,5 +134,9 @@ namespace Where1::InkBall {
 				throw SDL_Utilities::SDLError("Could not load texture:");
 			}
 		}
+	}
+
+	void Game::lose() {
+		current_level = std::make_unique<GameOverLevel>();
 	}
 }
