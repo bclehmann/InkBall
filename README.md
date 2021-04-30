@@ -10,7 +10,8 @@ I have working collisions and you can draw an ink trail which the balls interact
 
 Todo:
 - [x] Pockets and scoring
-- [ ] Level loading (it's hardcoded right now to one level)
+- [x] Level loading (it's hardcoded right now to one level)
+- [ ] Advancing to or allowing the user to select a new level once you win (currently you may only lose)
 - [ ] Level creation (maybe)
 
 # Building
