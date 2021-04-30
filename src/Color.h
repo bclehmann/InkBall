@@ -4,10 +4,10 @@
 
  namespace Where1::InkBall {
 	 enum class Color {
-		 Grey,
-		 Blue,
-		 Orange,
-		 Pink
+		 Grey = 1,
+		 Blue = 2,
+		 Orange = 3,
+		 Pink = 4
 	 };
  }
 
