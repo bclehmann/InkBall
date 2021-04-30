@@ -35,7 +35,7 @@ namespace Where1::InkBall {
 		SDL_Texture &get_texture(std::string name);
 
 		static const unsigned int TOP_BAR_HEIGHT = 30;
-		static const unsigned int HEIGHT = 600 + TOP_BAR_HEIGHT;
+		static const unsigned int HEIGHT = 608 + TOP_BAR_HEIGHT;
 		static const unsigned int WIDTH = 480;
 
 	private:
