@@ -32,6 +32,8 @@ namespace Where1::InkBall {
 
 		void lose();
 
+		SDL_Texture &get_texture(std::string name);
+
 		static const unsigned int TOP_BAR_HEIGHT = 30;
 		static const unsigned int HEIGHT = 600 + TOP_BAR_HEIGHT;
 		static const unsigned int WIDTH = 480;
@@ -46,7 +48,8 @@ namespace Where1::InkBall {
 		std::unique_ptr<SDL_Renderer, SDL_Utilities::SDLRendererDeleter> renderer;
 
 		std::unordered_map<std::string, std::unique_ptr<SDL_Texture, SDL_Utilities::SDLTextureDeleter>> textures;
-		std::string path_prefix = "./assets/";
+		std::string asset_path_prefix = "./assets/";
+		std::string level_path_prefix = "./levels/";
 		std::vector<std::pair<std::string, std::string>> texture_names{
 			{"block", "block.png"},
 			{"sparkle", "sparkle.png"},

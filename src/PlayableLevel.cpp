@@ -94,4 +94,8 @@ namespace Where1::InkBall {
 		}
 	}
 
+	PlayableLevel::PlayableLevel(DeserializedLevelInformation &deserialized, Game &game)
+			: game(game), blocks(deserialized.blocks), pockets(deserialized.pockets), balls(deserialized.balls) {
+	}
+
 }

@@ -8,6 +8,7 @@
 #include "Pocket.h"
 #include "Game.h"
 #include "Level.h"
+#include "LevelDeserialization.h"
 
 #include <vector>
 #include <list>
@@ -15,10 +16,12 @@
 
 namespace Where1::InkBall {
 	class Game;
+	class DeserializedLevelInformation;
 
 	class PlayableLevel : public Level {
 	public:
 		PlayableLevel(std::vector<Ball> balls, std::vector<Block> blocks, std::vector<Pocket> pockets, Game &game);
+		PlayableLevel(DeserializedLevelInformation &deserialized, Game &game);
 
 		std::vector<Ball> balls;
 		std::vector<Block> blocks;
