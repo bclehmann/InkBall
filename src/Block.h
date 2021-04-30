@@ -26,7 +26,7 @@ namespace Where1::InkBall {
 
 		void draw(SDL_Renderer *renderer) override;
 
-		static const int SIZE = 32;
+		static const int SIZE = 16;
 		static const int WIDTH = SIZE;
 		static const int HEIGHT = SIZE;
 	private:
