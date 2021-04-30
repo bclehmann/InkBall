@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Game.h"
 #include "GameOverLevel.h"
+#include "LevelDeserialization.h"
+#include "SerializedLevel.h"
 
 #include <SDL2/SDL_ttf.h>
 
@@ -79,30 +81,9 @@ namespace Where1::InkBall {
 
 		initialize_textures();
 
-		std::vector<Ball> balls = {
-				Ball(*textures["grey_ball"], Geometry::Vector2<double>{70, 70 + TOP_BAR_HEIGHT}, Geometry::Vector2<double>{50, 50}, Color::Grey),
-				Ball(*textures["blue_ball"], Geometry::Vector2<double>{70, 70 + TOP_BAR_HEIGHT}, Geometry::Vector2<double>{-50, -50}, Color::Blue),
-				Ball(*textures["orange_ball"], Geometry::Vector2<double>{70, 70 + TOP_BAR_HEIGHT}, Geometry::Vector2<double>{20, -50}, Color::Orange),
-				Ball(*textures["pink_ball"], Geometry::Vector2<double>{70, 70 + TOP_BAR_HEIGHT}, Geometry::Vector2<double>{-50, 20}, Color::Pink),
-		};
-		std::vector<Block> blocks = {Block(*textures["block"], Geometry::Vector2<double>{200, 200 + TOP_BAR_HEIGHT})};
-
-		for (int i = TOP_BAR_HEIGHT; i < HEIGHT - Block::SIZE; i += Block::SIZE) {
-			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(0, i));
-			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(WIDTH - Block::SIZE, i));
-		}
-
-		for (int i = 0; i <= WIDTH; i += Block::SIZE) {
-			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(i, TOP_BAR_HEIGHT));
-			blocks.emplace_back(*textures["block"], Geometry::Vector2<double>(i, HEIGHT - Block::SIZE));
-		}
-
-		std::vector<Pocket> pockets{
-				Pocket(*textures["pink_pocket"], Geometry::Vector2<double>(200, 300 + TOP_BAR_HEIGHT), Color::Pink),
-				Pocket(*textures["grey_pocket"], Geometry::Vector2<double>(200, 400 + TOP_BAR_HEIGHT), Color::Grey)
-		};
-
-		current_level = std::make_unique<PlayableLevel>(balls, blocks, pockets, *this);
+		std::string level_path = level_path_prefix + std::string("Level 1.ikl");
+		DeserializedLevelInformation deserialized = LevelDeserialization::read(level_path, *this);
+		current_level = std::make_unique<PlayableLevel>(deserialized, *this);
 	}
 
 	Game::~Game() {
@@ -115,7 +96,7 @@ namespace Where1::InkBall {
 			std::string &common_name = texture_info.first;
 			std::string &filename = texture_info.second;
 
-			std::string path = path_prefix + filename;
+			std::string path = asset_path_prefix + filename;
 			SDL_Surface *surface = IMG_Load(path.c_str());
 
 			if (surface == nullptr) {
@@ -138,5 +119,9 @@ namespace Where1::InkBall {
 
 	void Game::lose() {
 		current_level = std::make_unique<GameOverLevel>();
+	}
+
+	SDL_Texture &Game::get_texture(std::string name) {
+		return *textures[name];
 	}
 }
