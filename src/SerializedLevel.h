@@ -6,6 +6,8 @@
 #include "LevelSerialization.h"
 
 namespace Where1::InkBall {
+	class PlayableLevel;
+
 	class SerializedLevel {
 	public:
 		explicit SerializedLevel(PlayableLevel *level_to_serialize);
