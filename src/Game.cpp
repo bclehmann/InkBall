@@ -1,11 +1,11 @@
 
 #include <iostream>
 #include "Game.h"
-#include "GameOverLevel.h"
 #include "LevelDeserialization.h"
 #include "SerializedLevel.h"
 #include "MenuLevel.h"
 #include "EscapeMenu.h"
+#include "TextScreenLevel.h"
 
 #include <SDL2/SDL_ttf.h>
 
@@ -128,10 +128,14 @@ namespace Where1::InkBall {
 	}
 
 	void Game::lose() {
-		current_level = std::make_unique<GameOverLevel>();
+		current_level = std::make_unique<TextScreenLevel>("GAME OVER");
 	}
 
 	SDL_Texture &Game::get_texture(std::string name) {
 		return *textures[name];
+	}
+
+	void Game::win() {
+		current_level = std::make_unique<TextScreenLevel>("YOU WIN!");
 	}
 }

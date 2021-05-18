@@ -37,7 +37,15 @@ namespace Where1::InkBall {
 	}
 
 	void PlayableLevel::update(double timestep) {
+		bool unremoved_ball_exists = false;
+
 		for (auto &ball : balls) {
+			if(ball.is_removed()){
+				continue;
+			}else{
+				unremoved_ball_exists = true;
+			}
+
 			ball.update(timestep);
 
 			for (auto &block : blocks) {
@@ -65,6 +73,10 @@ namespace Where1::InkBall {
 					break; // To avoid reading invalidated references we only let it collide once per update
 				}
 			}
+		}
+
+		if(!unremoved_ball_exists){
+			game.win();
 		}
 	}
 

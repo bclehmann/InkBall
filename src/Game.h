@@ -30,6 +30,8 @@ namespace Where1::InkBall {
 
 		void quit();
 
+		void win();
+
 		void lose();
 
 		SDL_Texture &get_texture(std::string name);

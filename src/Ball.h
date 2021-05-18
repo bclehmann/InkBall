@@ -42,6 +42,8 @@ namespace Where1::InkBall {
 
 		void remove();
 
+		bool is_removed() const;
+
 		const Color color;
 
 

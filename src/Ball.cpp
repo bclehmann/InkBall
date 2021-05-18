@@ -142,4 +142,8 @@ namespace Where1::InkBall {
 	void Ball::remove() {
 		removed = true;
 	}
+
+	bool Ball::is_removed() const {
+		return removed;
+	}
 }

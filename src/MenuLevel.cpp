@@ -16,6 +16,9 @@ namespace Where1::InkBall {
 	}
 
 	void MenuLevel::draw(SDL_Renderer *renderer) {
+		SDL_SetRenderDrawColor(renderer, 230, 230, 230, SDL_ALPHA_OPAQUE);
+		SDL_RenderClear(renderer);
+
 		int i = 0;
 		for (auto &item : get_menu_items()) {
 			SDL_Rect rect = get_bounding_rect(item, i);
