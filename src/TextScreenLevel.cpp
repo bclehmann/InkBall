@@ -14,7 +14,7 @@ namespace Where1::InkBall {
 		const int SURTEXT_FONT_SIZE = 40;
 		const int SUBTEXT_FONT_SIZE = 20;
 
-		const std::string subtext = "Press escape for menu";
+		const std::string subtext = "Press ESC for menu";
 
 		std::pair<int, int> surtext_size = SDL_Utilities::GetStringSize(surtext, SURTEXT_FONT_SIZE);
 
