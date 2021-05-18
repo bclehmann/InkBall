@@ -3,7 +3,6 @@
 
 namespace Where1::InkBall {
 	SDL_Rect MenuLevel::get_bounding_rect(MenuItem &item, int index) {
-
 		std::pair<int, int> text_size = SDL_Utilities::GetStringSize(item.text, TEXT_SIZE);
 		int x = Game::WIDTH / 2 - text_size.first / 2;
 		int y = (Game::HEIGHT - Game::TOP_BAR_HEIGHT) / 2 - (index + 1) * text_size.second / 2;
@@ -37,8 +36,6 @@ namespace Where1::InkBall {
 
 	void MenuLevel::handle_mouse_button(SDL_MouseButtonEvent &e) {
 		if (e.type == SDL_MOUSEBUTTONUP && e.button & SDL_BUTTON_LEFT) {
-			int y = (Game::HEIGHT - Game::TOP_BAR_HEIGHT) / 2;
-
 			int i = 0;
 			for (auto &item : get_menu_items()) {
 				SDL_Rect rect = get_bounding_rect(item, i);
