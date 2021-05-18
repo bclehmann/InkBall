@@ -4,6 +4,8 @@
 #include "GameOverLevel.h"
 #include "LevelDeserialization.h"
 #include "SerializedLevel.h"
+#include "MenuLevel.h"
+#include "EscapeMenu.h"
 
 #include <SDL2/SDL_ttf.h>
 
@@ -49,10 +51,18 @@ namespace Where1::InkBall {
 			case SDL_QUIT:
 				quit();
 				break;
-			case SDL_MOUSEMOTION: {
+			case SDL_MOUSEMOTION:
 				current_level->handle_mouse_move(event.motion);
 				break;
-			}
+			case SDL_KEYUP:
+				if(event.key.keysym.scancode = SDL_SCANCODE_ESCAPE){
+					current_level = std::make_unique<EscapeMenu>(*this);
+				}
+				break;
+			case SDL_MOUSEBUTTONUP:
+			case SDL_MOUSEBUTTONDOWN:
+				current_level->handle_mouse_button(event.button);
+				break;
 			default:
 				//printf("%d\n", event.type);
 				break;
