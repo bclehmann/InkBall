@@ -16,7 +16,7 @@ add_executable(InkBall src/main.cpp src/SDLWindowDeleter.cpp src/SDLWindowDelete
         src/SDLError.h src/SDLRendererDeleter.cpp src/SDLRendererDeleter.h src/SDLTextureDeleter.cpp
         src/SDLTextureDeleter.h src/Drawing.cpp src/Drawing.h src/Vector2.h src/Ball.cpp src/Ball.h src/PlayableLevel.cpp
         src/PlayableLevel.h src/Block.cpp src/Block.h src/Renderable.h src/Updatable.h src/Line.h src/InkTrail.cpp
-        src/InkTrail.h src/Pocket.cpp src/Pocket.h src/Collidable.h src/BoxCollidable.h src/Color.h src/Level.h src/GameOverLevel.cpp src/GameOverLevel.h src/Level.cpp src/LevelSerialization.h src/SerializedLevel.cpp src/SerializedLevel.h src/LevelDeserialization.cpp src/LevelDeserialization.h)
+        src/InkTrail.h src/Pocket.cpp src/Pocket.h src/Collidable.h src/BoxCollidable.h src/Color.h src/Level.h src/GameOverLevel.cpp src/GameOverLevel.h src/Level.cpp src/LevelSerialization.h src/SerializedLevel.cpp src/SerializedLevel.h src/LevelDeserialization.cpp src/LevelDeserialization.h src/Threads.h)
 
 target_link_libraries(InkBall mingw32 SDL2main SDL2 SDL2_image SDL2_ttf)
 
