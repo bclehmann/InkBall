@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 3.19)
 project(InkBall)
 
+
+option(MINGW_STDTHREADS_GENERATE_STDHEADERS "" ON)
+add_subdirectory(${PROJECT_SOURCE_DIR}/include/mingw)
+#target_link_libraries(${TARGET} ${PROJECT_SOURCE_DIR}/include/mingw)
+
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
+#set(CMAKE_EXE_LINKER_FLAGS "-pthread")
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 link_directories(${PROJECT_SOURCE_DIR}/lib)
