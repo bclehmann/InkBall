@@ -8,7 +8,7 @@ namespace Where1::InkBall {
 		LevelHeader *header = reinterpret_cast<LevelHeader *>(buffer);
 
 		if (bytes < sizeof(LevelHeader)) {
-			throw std::out_of_range("Not enough space for LevelHeader");
+			throw std::out_of_range("Not enough space allocated for LevelHeader");
 		}
 
 		if (header->version_major != 1 || header->version_minor != 1) {
