@@ -4,7 +4,7 @@
 #include "LevelSerialization.h"
 
 namespace Where1::InkBall {
-	DeserializedLevelInformation LevelDeserialization::deserialize(unsigned char *buffer, Game &game) {
+	DeserializedLevelInformation LevelDeserialization::deserialize(unsigned char *buffer, Game &game, int bytes) {
 		LevelHeader *header = reinterpret_cast<LevelHeader *>(buffer);
 
 		if (header->version_major != 1 || header->version_minor != 1) {
@@ -92,23 +92,21 @@ namespace Where1::InkBall {
 	DeserializedLevelInformation LevelDeserialization::read(std::string path, Game &game) {
 		const size_t MAX_SIZE = 10 * 1024;
 
-		char *local_buffer = new char[MAX_SIZE];
+		FILE *fp = fopen(path.c_str(), "r");
+		fseek(fp, 0, SEEK_END);
+		size_t file_size = ftell(fp);
+		rewind(fp);
 
-		try {
-			std::fstream filestream(path, std::ios_base::in);
-			filestream.read(local_buffer, MAX_SIZE);
+		char *local_buffer = new char[file_size];
+		size_t read_chars = fread(local_buffer, 1, file_size, fp);
 
-			if (!filestream.eof()) {
-				delete[] local_buffer;
-				throw std::length_error("File too big to serialize");
-			}
-
-			DeserializedLevelInformation result = deserialize(reinterpret_cast<unsigned char *>(local_buffer), game);
-
-			return result;
-		} catch (...) {
-			delete[] local_buffer;
-			throw;
+		if (read_chars != file_size) {
+			throw std::length_error("read_chars differed from file size");
 		}
+
+		DeserializedLevelInformation result = deserialize(reinterpret_cast<unsigned char *>(local_buffer), game, file_size);
+
+		return result;
+
 	}
 }
