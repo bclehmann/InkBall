@@ -23,7 +23,7 @@ namespace Where1::InkBall {
 		static DeserializedLevelInformation read(std::string path, Game &game);
 
 	private:
-		static DeserializedLevelInformation deserialize(unsigned char *buffer, Game &game, int bytes);
+		static DeserializedLevelInformation deserialize(unsigned char *buffer, Game &game, size_t bytes);
 	};
 
 }

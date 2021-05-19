@@ -4,11 +4,23 @@
 #include "LevelSerialization.h"
 
 namespace Where1::InkBall {
-	DeserializedLevelInformation LevelDeserialization::deserialize(unsigned char *buffer, Game &game, int bytes) {
+	DeserializedLevelInformation LevelDeserialization::deserialize(unsigned char *buffer, Game &game, size_t bytes) {
 		LevelHeader *header = reinterpret_cast<LevelHeader *>(buffer);
+
+		if (bytes < sizeof(LevelHeader)) {
+			throw std::out_of_range("Not enough space for LevelHeader");
+		}
 
 		if (header->version_major != 1 || header->version_minor != 1) {
 			throw std::invalid_argument("Unrecognized file format version. Could not deserialize.");
+		}
+
+		size_t bytes_needed = sizeof(LevelHeader) + header->num_blocks * sizeof(BlockInformation) +
+							  header->num_pockets * sizeof(PocketInformation) +
+							  header->num_balls * sizeof(BallInformation);
+
+		if(bytes_needed != bytes){
+			throw std::out_of_range("File and required file size mismatch");
 		}
 
 		DeserializedLevelInformation return_value;
