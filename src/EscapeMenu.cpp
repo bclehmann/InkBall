@@ -7,6 +7,12 @@ namespace Where1::InkBall {
 		return // No clue why autoformat butchered it like this....
 				{
 						MenuItem{
+								.text = "Select Level",
+								.on_click = [](Game &game) {
+									game.open_level_select();
+								}
+						},
+						MenuItem{
 								.text = "Quit",
 								.on_click = [](Game &game) {
 									game.quit();

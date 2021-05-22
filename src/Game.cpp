@@ -6,6 +6,7 @@
 #include "MenuLevel.h"
 #include "EscapeMenu.h"
 #include "TextScreenLevel.h"
+#include "LevelSelectMenu.h"
 
 #include <SDL2/SDL_ttf.h>
 
@@ -91,9 +92,7 @@ namespace Where1::InkBall {
 
 		initialize_textures();
 
-		std::string level_path = level_path_prefix + std::string("Level 1.ikl");
-		DeserializedLevelInformation deserialized = LevelDeserialization::read(level_path, *this);
-		current_level = std::make_unique<PlayableLevel>(deserialized, *this);
+		load_level_from_path(LEVEL_PATH_PREFIX + std::string("Level 1.ikl"));
 	}
 
 	Game::~Game() {
@@ -106,7 +105,7 @@ namespace Where1::InkBall {
 			std::string &common_name = texture_info.first;
 			std::string &filename = texture_info.second;
 
-			std::string path = asset_path_prefix + filename;
+			std::string path = ASSET_PATH_PREFIX + filename;
 			SDL_Surface *surface = IMG_Load(path.c_str());
 
 			if (surface == nullptr) {
@@ -137,5 +136,22 @@ namespace Where1::InkBall {
 
 	void Game::win() {
 		current_level = std::make_unique<TextScreenLevel>("YOU WIN!");
+	}
+
+	void Game::open_level_select() {
+		current_level = std::make_unique<LevelSelectMenu>(*this);
+	}
+
+	std::string Game::get_asset_path_prefix() {
+		return ASSET_PATH_PREFIX;
+	}
+
+	std::string Game::get_level_path_prefix() {
+		return LEVEL_PATH_PREFIX;
+	}
+
+	void Game::load_level_from_path(std::string path) {
+		DeserializedLevelInformation deserialized = LevelDeserialization::read(path, *this);
+		current_level = std::make_unique<PlayableLevel>(deserialized, *this);
 	}
 }
