@@ -56,7 +56,7 @@ namespace Where1::InkBall {
 				level_stack.top()->handle_mouse_move(event.motion);
 				break;
 			case SDL_KEYUP:
-				if(event.key.keysym.scancode = SDL_SCANCODE_ESCAPE){
+				if(event.key.keysym.scancode == SDL_SCANCODE_ESCAPE){
 					if(level_stack.top()->is_menu()){
 						pop_level();
 					}else {
