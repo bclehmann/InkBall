@@ -9,6 +9,9 @@ namespace Where1::InkBall {
 	}
 
 	void TextScreenLevel::draw(SDL_Renderer *renderer) {
+		SDL_SetRenderDrawColor(renderer, 230, 230, 230, SDL_ALPHA_OPAQUE);
+		SDL_RenderClear(renderer);
+
 		const int PADDING = 10;
 
 		const int SURTEXT_FONT_SIZE = 40;
@@ -48,5 +51,9 @@ namespace Where1::InkBall {
 	TextScreenLevel::TextScreenLevel(std::string surtext)
 			: surtext(surtext) {
 
+	}
+
+	bool TextScreenLevel::is_menu() {
+		return false;
 	}
 }

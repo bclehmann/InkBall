@@ -33,6 +33,8 @@ namespace Where1::InkBall {
 
 		void handle_mouse_move(SDL_MouseMotionEvent &e) override;
 
+		virtual bool is_menu() override;
+
 	private:
 		bool is_drawing_trail;
 		bool valid_iterator = false;

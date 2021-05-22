@@ -17,6 +17,8 @@ namespace Where1::InkBall {
 
 		virtual void handle_mouse_button(SDL_MouseButtonEvent &e) override;
 
+		virtual bool is_menu() override;
+
 	protected:
 		virtual std::vector<MenuItem> get_menu_items() = 0;
 

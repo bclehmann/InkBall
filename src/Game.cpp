@@ -30,14 +30,14 @@ namespace Where1::InkBall {
 
 			while (delta_t > 1 / 60.0) {
 				delta_t -= max_timestep;
-				current_level->update(max_timestep);
+				level_stack.top()->update(max_timestep);
 			}
 
 			if (delta_t > 0) {
-				current_level->update(delta_t);
+				level_stack.top()->update(delta_t);
 			}
 
-			current_level->draw(renderer.get());
+			level_stack.top()->draw(renderer.get());
 
 			SDL_RenderPresent(renderer.get());
 		}
@@ -53,16 +53,20 @@ namespace Where1::InkBall {
 				quit();
 				break;
 			case SDL_MOUSEMOTION:
-				current_level->handle_mouse_move(event.motion);
+				level_stack.top()->handle_mouse_move(event.motion);
 				break;
 			case SDL_KEYUP:
 				if(event.key.keysym.scancode = SDL_SCANCODE_ESCAPE){
-					current_level = std::make_unique<EscapeMenu>(*this);
+					if(level_stack.top()->is_menu()){
+						pop_level();
+					}else {
+						open_escape_menu();
+					}
 				}
 				break;
 			case SDL_MOUSEBUTTONUP:
 			case SDL_MOUSEBUTTONDOWN:
-				current_level->handle_mouse_button(event.button);
+				level_stack.top()->handle_mouse_button(event.button);
 				break;
 			default:
 				//printf("%d\n", event.type);
@@ -127,7 +131,7 @@ namespace Where1::InkBall {
 	}
 
 	void Game::lose() {
-		current_level = std::make_unique<TextScreenLevel>("GAME OVER");
+		level_stack.push(std::make_unique<TextScreenLevel>("GAME OVER"));
 	}
 
 	SDL_Texture &Game::get_texture(std::string name) {
@@ -135,11 +139,11 @@ namespace Where1::InkBall {
 	}
 
 	void Game::win() {
-		current_level = std::make_unique<TextScreenLevel>("YOU WIN!");
+		level_stack.push(std::make_unique<TextScreenLevel>("YOU WIN!"));
 	}
 
 	void Game::open_level_select() {
-		current_level = std::make_unique<LevelSelectMenu>(*this);
+		level_stack.push(std::make_unique<LevelSelectMenu>(*this));
 	}
 
 	std::string Game::get_asset_path_prefix() {
@@ -152,6 +156,21 @@ namespace Where1::InkBall {
 
 	void Game::load_level_from_path(std::string path) {
 		DeserializedLevelInformation deserialized = LevelDeserialization::read(path, *this);
-		current_level = std::make_unique<PlayableLevel>(deserialized, *this);
+
+		clear_level_stack();
+		level_stack.push(std::make_unique<PlayableLevel>(deserialized, *this));
+	}
+
+	void Game::open_escape_menu() {
+		level_stack.push(std::make_unique<EscapeMenu>(*this));
+	}
+
+	void Game::clear_level_stack() {
+		while(!level_stack.empty())
+			level_stack.pop();
+	}
+
+	void Game::pop_level() {
+		level_stack.pop();
 	}
 }

@@ -110,4 +110,8 @@ namespace Where1::InkBall {
 			: game(game), blocks(deserialized.blocks), pockets(deserialized.pockets), balls(deserialized.balls) {
 	}
 
+	bool PlayableLevel::is_menu() {
+		return false;
+	}
+
 }

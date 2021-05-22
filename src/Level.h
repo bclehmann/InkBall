@@ -10,6 +10,7 @@ namespace Where1::InkBall {
 	public:
 		virtual void handle_mouse_move(SDL_MouseMotionEvent &e);
 		virtual void handle_mouse_button(SDL_MouseButtonEvent &e);
+		virtual bool is_menu() = 0;
 	};
 }
 

@@ -16,6 +16,7 @@
 #include <unordered_map>
 #include <vector>
 #include <list>
+#include <stack>
 
 class Level;
 
@@ -36,6 +37,10 @@ namespace Where1::InkBall {
 
 		void open_level_select();
 
+		void open_escape_menu();
+
+		void pop_level();
+
 		void load_level_from_path(std::string path);
 
 		SDL_Texture &get_texture(std::string name);
@@ -53,6 +58,9 @@ namespace Where1::InkBall {
 		void initialize_textures();
 
 		bool should_quit = false;
+
+		void clear_level_stack();
+
 		std::unique_ptr<SDL_Window, SDL_Utilities::SDLWindowDeleter> window;
 		std::unique_ptr<SDL_Renderer, SDL_Utilities::SDLRendererDeleter> renderer;
 
@@ -71,7 +79,7 @@ namespace Where1::InkBall {
 				{"orange_pocket", "orange_pocket.png"},
 		};
 
-		std::unique_ptr<Level> current_level;
+		std::stack<std::unique_ptr<Level>> level_stack;
 
 		std::string ASSET_PATH_PREFIX = "./assets/";
 		std::string LEVEL_PATH_PREFIX = "./levels/";

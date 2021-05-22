@@ -51,4 +51,8 @@ namespace Where1::InkBall {
 			}
 		}
 	}
+
+	bool MenuLevel::is_menu() {
+		return true;
+	}
 }

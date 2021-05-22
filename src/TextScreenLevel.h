@@ -5,6 +5,7 @@
 
 #include <string>
 #include "Level.h"
+#include "Game.h"
 
 namespace Where1::InkBall {
 	class TextScreenLevel : public Level {
@@ -14,6 +15,8 @@ namespace Where1::InkBall {
 		void draw(SDL_Renderer *renderer) override;
 
 		void update(double timestep) override;
+
+		virtual bool is_menu() override;
 
 	private:
 		std::string surtext;
