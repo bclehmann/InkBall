@@ -2,7 +2,7 @@
 #ifndef INKBALL_RENDERABLE_H
 #define INKBALL_RENDERABLE_H
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 namespace Where1::InkBall{
 	class Renderable{

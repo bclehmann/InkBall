@@ -8,7 +8,10 @@
 #include "TextScreenLevel.h"
 #include "LevelSelectMenu.h"
 
-#include <SDL2/SDL_ttf.h>
+#if 0
+// TODO: SDL2_ttf isn't linking properly right now :/
+#include <SDL_ttf.h>
+#endif
 
 namespace Where1::InkBall {
 	void Game::play() {
@@ -81,7 +84,10 @@ namespace Where1::InkBall {
 
 
 		SDL_Init(SDL_INIT_VIDEO);
+#if 0
+        // TODO: SDL2_ttf isn't linking properly right now :/
 		TTF_Init();
+#endif
 
 		if (!window) {
 			throw SDL_Utilities::SDLError("Could not create Game window:");
@@ -100,7 +106,10 @@ namespace Where1::InkBall {
 	}
 
 	Game::~Game() {
+#if 0
+        // TODO: SDL2_ttf isn't linking properly right now :/
 		TTF_Quit();
+#endif
 		SDL_Quit();
 	}
 

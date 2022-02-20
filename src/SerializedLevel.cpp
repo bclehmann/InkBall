@@ -23,20 +23,20 @@ namespace Where1::InkBall {
 		unsigned int size = required_size(*level_to_serialize);
 		alloc_buffer(size);
 
-		if (level_to_serialize->blocks.size() > (int) std::numeric_limits<typeof(LevelHeader::num_blocks)>::max()) {
+		if (level_to_serialize->blocks.size() > (int) std::numeric_limits<decltype(LevelHeader::num_blocks)>::max()) {
 			throw std::overflow_error("Too many blocks to serialize");
 		}
 
-		if (level_to_serialize->pockets.size() > (int) std::numeric_limits<typeof(LevelHeader::num_pockets)>::max()) {
+		if (level_to_serialize->pockets.size() > (int) std::numeric_limits<decltype(LevelHeader::num_pockets)>::max()) {
 			throw std::overflow_error("Too many pockets to serialize");
 		}
 
-		if (level_to_serialize->balls.size() > (int) std::numeric_limits<typeof(LevelHeader::num_balls)>::max()) {
+		if (level_to_serialize->balls.size() > (int) std::numeric_limits<decltype(LevelHeader::num_balls)>::max()) {
 			throw std::overflow_error("Too many balls to serialize");
 		}
 
 		LevelHeader header;
-		header.num_blocks = static_cast<typeof(LevelHeader::num_blocks)>(level_to_serialize->blocks.size());
+		header.num_blocks = static_cast<decltype(LevelHeader::num_blocks)>(level_to_serialize->blocks.size());
 		header.num_pockets = static_cast<uint8_t>(level_to_serialize->pockets.size());
 		header.num_balls = static_cast<uint8_t>(level_to_serialize->balls.size());
 

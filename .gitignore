@@ -1,6 +1,5 @@
 bin/
 cmake-build-debug
-include/
 lib/
 share/
 .idea/

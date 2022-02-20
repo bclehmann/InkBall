@@ -1,4 +1,4 @@
-#include "SDL2/SDL.h"
+#include "SDL.h"
 
 #ifndef INKBALL_SDLWINDOWDELETER_H
 #define INKBALL_SDLWINDOWDELETER_H

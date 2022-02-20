@@ -6,7 +6,7 @@
 #include "Vector2.h"
 #include "Line.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <cmath>
 #include <vector>
 

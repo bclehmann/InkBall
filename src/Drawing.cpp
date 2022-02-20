@@ -1,7 +1,10 @@
 
 #include "Drawing.h"
 
-#include <SDL2/SDL_ttf.h>
+#if 0
+// TODO: SDL2_ttf isn't linking properly right now :/
+#include <SDL_ttf.h>
+#endif
 
 namespace Where1::SDL_Utilities {
 	int CircleError(int x, int y, int r) {
@@ -71,6 +74,8 @@ namespace Where1::SDL_Utilities {
 	}
 
 	void WriteText(SDL_Renderer *renderer, Geometry::Vector2<double> position, std::string text, int size, uint8_t red, uint8_t blue, uint8_t green) {
+#if 0
+        // TODO: SDL2_ttf isn't linking properly right now :/
 		TTF_Font *sans = TTF_OpenFont("assets/LiberationSans-Regular.ttf", size);
 
 		if(sans == nullptr){
@@ -108,9 +113,12 @@ namespace Where1::SDL_Utilities {
 
 		SDL_DestroyTexture(texture);
 		texture = nullptr;
+#endif
 	}
 
 	std::pair<int, int> GetStringSize(std::string text, int size) {
+#if 0
+        // TODO: SDL2_ttf isn't linking properly right now :/
 		TTF_Font *sans = TTF_OpenFont("assets/LiberationSans-Regular.ttf", size);
 
 		if(sans == nullptr){
@@ -122,5 +130,7 @@ namespace Where1::SDL_Utilities {
 		TTF_SizeText(sans, text.c_str(), &w, &h);
 
 		return std::make_pair(w, h);
+#endif
+        return std::make_pair(0, 0);
 	}
 }

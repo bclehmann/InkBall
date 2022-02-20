@@ -3,7 +3,7 @@
 #define INKBALL_SDLTEXTUREDELETER_H
 
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 namespace Where1::SDL_Utilities {
 	class SDLTextureDeleter {

@@ -1,0 +1,9 @@
+[submodule "include/SDL2"]
+	path = include/SDL2
+	url = https://github.com/libsdl-org/SDL
+[submodule "include/SDL2_image"]
+	path = include/SDL2_image
+	url = https://github.com/libsdl-org/SDL_image
+[submodule "include/SDL2_ttf"]
+	path = include/SDL2_ttf
+	url = https://github.com/libsdl-org/SDL_ttf

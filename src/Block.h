@@ -7,7 +7,7 @@
 #include "Line.h"
 #include "BoxCollidable.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <array>
 
 
